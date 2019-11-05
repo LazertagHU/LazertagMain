@@ -27,8 +27,8 @@ public:
     /// Default constructor of the SendTask
     /// \details
     /// Names its task, binds its pin and inits the flag and the pool.
-    SendTask( const char * name, hwlib::target::d2_36kHz led, hwlib::target::pin_out laser, int weapondelay ):
-        task( 8, name ),
+    SendTask(int prio, const char * name, hwlib::target::d2_36kHz led, hwlib::target::pin_out laser, int weapondelay ):
+        task( prio, name ),
         led( led ),
         laser( laser ),
         weapondelay( weapondelay ),

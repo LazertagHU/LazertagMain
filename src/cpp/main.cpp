@@ -33,13 +33,13 @@ int main(){
     auto playerpool         = rtos::pool<PlayerInfo>("playerpool");
     
     /* constructing tasks */
-    auto display            = DisplayTaak("DisplayTaak");
-    auto transfer           = TransferHitsControlTaak("TransferHitsControlTaak",playerpool);
-    auto transmitter        = SendTask( "InputTask", led, lasersight, 1000 );
-    auto Speaker            = SpeakerTaak("SpeakerTaak");
-    auto runGame            = RunGameTaak("RunGameTaak",display, transmitter, transfer, playerpool, Speaker);   
-    auto decoder            = msg_decoder("decoder", runGame);
-    auto pause_detection    = pause_detector("pause_detector", ir_sensor, decoder);
+    auto display            = DisplayTaak(2, "DisplayTaak");
+    auto transfer           = TransferHitsControlTaak(9, "TransferHitsControlTaak",playerpool);
+    auto transmitter        = SendTask(8, "InputTask", led, lasersight, 1000 );
+    auto Speaker            = SpeakerTaak(4, "SpeakerTaak");
+    auto runGame            = RunGameTaak(6, "RunGameTaak",display, transmitter, transfer, playerpool, Speaker);   
+    auto decoder            = msg_decoder(1, "decoder", runGame);
+    auto pause_detection    = pause_detector(0, "pause_detector", ir_sensor, decoder);
 
     /* run rtos */
     rtos::run();

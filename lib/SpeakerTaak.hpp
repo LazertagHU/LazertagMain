@@ -13,8 +13,8 @@ private:
     rtos::timer             SpeakerTimer;
     void main() override;
 public:
-    SpeakerTaak(const char * name):
-        task                (4, name),
+    SpeakerTaak(int prio, const char * name):
+        task                (prio, name),
         ShootFlag           (this, "ShootFlag"),
         HitFlag             (this, "HitFlag"),
         SpeakerTimer        (this, "SpeakerTimer")
