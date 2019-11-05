@@ -27,8 +27,8 @@ public:
     /// Default constructor for the InputControlTaak
     /// \details    
     /// Set task name, binds the listener, inits the channel and makes the button and keypad tasks
-    InputControlTaak(InputListener *Inputlistener, const char * name):
-    task                (6, name),
+    InputControlTaak(int prio, InputListener *Inputlistener, const char * name):
+    task                (prio, name),
     Inputlistener       (Inputlistener),
     InputChannel        (this, "InputChannel"),
     Keypadtaak          ("KeypadTaak", this),

@@ -148,7 +148,7 @@ public:
     /// The default constructor of RunGameTaak
     /// \details
     /// Names its task, binds all given paramaters, inits own objects and starts its 1s clock.
-    RunGameTaak(
+    RunGameTaak(int prio,
         const char * name,
         DisplayTaak & display, 
         SendTask& transmitter,
@@ -156,12 +156,12 @@ public:
         rtos::pool<PlayerInfo> & playerpool,
         SpeakerTaak & Speaker
     ):
-        task(6, name ),
+        task(prio, name ),
         display(display),
         transmitter(transmitter),
         transfer(transfer),
 	    Speaker(Speaker),
-        inputControl(this, "InputControlTaak"),
+        inputControl(7, this, "InputControlTaak"),
         inputChannel(this, "inputChannel"),
         messageFlag(this, "messageFlag"),
         messagepool("messagepool"),

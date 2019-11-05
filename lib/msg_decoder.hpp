@@ -24,11 +24,11 @@ public:
     /// Default constructor for the msg_decoder task.
     /// \details
     /// Names the task, binds the listener, inits the pauses channel and inits the reset_timer.
-    msg_decoder( 
+    msg_decoder(int prio,
         const char * name,
         msg_listener & listener
     ):
-        task( 1, name ),
+        task( prio, name ),
         listener(listener),
         pauses(this, "pauses"),
         reset_timer(this, "reset_timer")
