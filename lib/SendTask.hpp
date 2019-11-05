@@ -15,7 +15,6 @@ private:
     int weapondelay;
     rtos::flag SendFlag;
     rtos::pool<uint32_t> sendpool;
-    rtos::mutex send_mutex;
 
     /// \brief
     /// The main() of the SendTaak.

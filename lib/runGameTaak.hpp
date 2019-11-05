@@ -147,12 +147,13 @@ public:
     /// \details
     /// Names its task, binds all given paramaters, inits own objects and starts its 1s clock.
     RunGameTaak(
+        const char * name,
         DisplayTaak & display, 
         SendTask& transmitter,
         TransferHitsControlTaak& transfer,
         rtos::pool<PlayerInfo> & playerpool
     ):
-        task(6, "runGameTaak"),
+        task(6, name ),
         display(display),
         transmitter(transmitter),
         transfer(transfer),

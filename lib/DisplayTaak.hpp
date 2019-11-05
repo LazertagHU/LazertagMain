@@ -61,8 +61,8 @@ public:                                                                         
     /// Default constructor for DisplayTaak
     /// \details    
     /// Constructs display task with a name and a channel for messages to be displayed
-    DisplayTaak():                                                                  //- CLASS CONSTRUCTOR
-    task                (2, "DisplayTaak"),                                            //- creeer de rtos::task
+    DisplayTaak(const char * name):                                                                  //- CLASS CONSTRUCTOR
+    task                (2, name),                                            //- creeer de rtos::task
     inputChannel        (this, "inputChannel")                                      //- creeer de rtos::Channel
     {}                                                                              //
                                                                                     //////////////////////////////////////////////////////////////
