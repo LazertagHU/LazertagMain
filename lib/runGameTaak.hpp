@@ -27,7 +27,7 @@ private:
 
     enum class substates_runGame_t
     {
-        ALIVE, WEAPON_COOLDOWN, HIT
+        ALIVE, WEAPON_COOLDOWN, HIT, WEAPON_RELOAD
     };
 
     DisplayTaak&                display;

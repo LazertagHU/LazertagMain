@@ -6,6 +6,8 @@ struct weapon{
     int damage;
     int deathDelay;
     int weaponCooldown;
+    int weaponReloadTime;
+    int bullets;
 };
 
 
