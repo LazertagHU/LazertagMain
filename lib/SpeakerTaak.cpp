@@ -51,8 +51,8 @@ void SpeakerTaak::main(){
                         hwlib::wait_us(half_period);
                         lsp.write(0);
                         lsp.flush();
-                        hwlib::wait_us(half_period);
-                        //hwlib::cout<<"hij komt in shoot1\n";
+                        SpeakerTimer.set(half_period);
+                        wait(SpeakerTimer);
                         if(end < hwlib::now_us()){
                             //hwlib::cout<< "komt in if shooting\n";
                             TempFreq                = Shooting[1].Frequentie;
@@ -71,7 +71,8 @@ void SpeakerTaak::main(){
                         hwlib::wait_us(half_period);
                         lsp.write(0);
                         lsp.flush();
-                        hwlib::wait_us(half_period);
+                        SpeakerTimer.set(half_period);
+                        wait(SpeakerTimer);
                         TempFreq       -= 4;
                         half_period     = (1'000'000 / (3 * TempFreq));
                         if(end < hwlib::now_us()){
@@ -94,7 +95,8 @@ void SpeakerTaak::main(){
                         hwlib::wait_us(half_period);
                         lsp.write(0);
                         lsp.flush();
-                        hwlib::wait_us(half_period);
+                        SpeakerTimer.set(half_period);
+                        wait(SpeakerTimer);
                         
                         if(end < hwlib::now_us()){
                             TempFreq                = Hit[1].Frequentie;
@@ -111,7 +113,8 @@ void SpeakerTaak::main(){
                         hwlib::wait_us(half_period);
                         lsp.write(0);
                         lsp.flush();
-                        hwlib::wait_us(half_period);
+                        hSpeakerTimer.set(half_period);
+                        wait(SpeakerTimer);
                         if(end < hwlib::now_us()){
                             SpeakerState = SpeakerState_t::WAIT_FOR_INPUT;
                             break;
