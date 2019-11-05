@@ -80,7 +80,7 @@ private:
     /// 
     /// This function calculates the specific command that needs to be send 
     /// by the game leader at a specific countdown timer.
-    void computeStartCommand(uint32_t countdown, uint32_t &startCommand);
+    uint32_t computeStartCommand(uint32_t countdown, uint32_t command);
 
     /// \brief
     /// Returns pressed chars on keypad.
@@ -117,6 +117,10 @@ private:
     /// can't shoot or be shot after he has been shot by another player
     int computeDeathDelay(uint32_t message);
 
+
+    void computeShootCommand(uint32_t & shootcommand);
+
+
     /// \brief
     /// Returns after shot timeout.
     /// \details
@@ -149,7 +153,7 @@ public:
         TransferHitsControlTaak& transfer,
         rtos::pool<PlayerInfo> & playerpool
     ):
-        task( name ),
+        task(6, name ),
         display(display),
         transmitter(transmitter),
         transfer(transfer),

@@ -26,7 +26,7 @@ public:
     /// \details
     /// Names its task and inits its flag and pool
     TransferHitsControlTaak( const char * name, rtos::pool< PlayerInfo > & entity_pool ):
-        task( name ),
+        task( 8, name ),
         TransferEnableFlag( this, "TransferEnableFlag" ),
 	    entity_pool( entity_pool ),
         hitAmount(0)
