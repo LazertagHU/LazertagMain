@@ -128,9 +128,9 @@ void RunGameTaak::main()
                 transmitter.SendMessage(setTimeCommand);
             }else if( bnID == buttonid::starButton){
                 countdown = 30;
-                display.showMessage(countdown, '30');
+                startCommand = computeStartCommand(countdown, startCommand);
+                display.showMessage(countdown, 'T');
                 display.showMessage("press * to send start command", 'M');
-                computeStartCommand(countdown, startCommand);
                 currentState = state_t::START_GAME_TRANSMISSION_STATE;
             }else{
                     // donno of deze moet
@@ -377,12 +377,11 @@ int RunGameTaak::waitForInput(char place)
     int tens;
     int ones;
     int returnval = -1;
-    bool loop = true;
 
     enum class waitForInputStates{AWAIT_FIRST_CHARACTER, AWAIT_SECOND_CHARACTER, END};
     waitForInputStates state = waitForInputStates::AWAIT_FIRST_CHARACTER;
     
-    while (loop)
+    for(;;)
     {
         switch(state)
         {
@@ -406,12 +405,11 @@ int RunGameTaak::waitForInput(char place)
                 {
                     ones = static_cast<int>(bnID);
                     display.showMessage((tens*10) + ones , place);
-                    state = waitForInputStates::END;
                     returnval = (tens*10) + ones;
+                    state = waitForInputStates::END;
                 }
                 else if(bnID == buttonid::starButton)
                 {
-    
                     returnval = tens;
                     state = waitForInputStates::END;
                 }
@@ -425,7 +423,6 @@ int RunGameTaak::waitForInput(char place)
                 break;
         }
     }
-    return -1;
 };
 
 uint32_t RunGameTaak::calculateCheckSum(uint32_t input)
