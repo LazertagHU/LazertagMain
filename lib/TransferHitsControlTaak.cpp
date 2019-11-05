@@ -14,7 +14,7 @@ void TransferHitsControlTaak::main(){
             case states::WAIT_FOR_TRIGGER:
                 wait( TransferEnableFlag );
             // break;
-                PlayerInfo player = entity_pool.read();
+                PlayerInfo player = playerpool.read();
                 int playerID = player.GetPlayerID();
                 
                 hwlib::cout << "PlayerID: " << playerID << "\n";

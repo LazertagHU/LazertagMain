@@ -8,7 +8,7 @@
 class TransferHitsControlTaak : public rtos::task<> {
 private:
     rtos::flag TransferEnableFlag;
-    rtos::pool< PlayerInfo > & entity_pool;
+    rtos::pool< PlayerInfo > & playerpool;
     enum class states { WAIT_FOR_TRIGGER };
     hit hits[100];
     states state;
@@ -28,7 +28,7 @@ public:
     TransferHitsControlTaak(int prio, const char * name, rtos::pool< PlayerInfo > & entity_pool ):
         task( prio, name ),
         TransferEnableFlag( this, "TransferEnableFlag" ),
-	    entity_pool( entity_pool ),
+	    playerpool( playerpool ),
         hitAmount(0)
     {}
 
