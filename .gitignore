@@ -1,3 +1,9 @@
+.codelite
+
+#codelite
+*.mk
+*.project
+
 # Prerequisites
 *.d
 
