@@ -40,7 +40,7 @@ private:
     rtos::pool<PlayerInfo>&     playerpool;
     rtos::clock                 secondClock;
     rtos::timer                 delayTimer;
-    buttonid                    bnID;
+    buttonid                    bnID; 
 
     /// \brief
     /// The main() of the RunGame task.
@@ -147,16 +147,17 @@ public:
     /// \details
     /// Names its task, binds all given paramaters, inits own objects and starts its 1s clock.
     RunGameTaak(
+        const char * name,
         DisplayTaak & display, 
         SendTask& transmitter,
         TransferHitsControlTaak& transfer,
         rtos::pool<PlayerInfo> & playerpool
     ):
-        task(6, "runGameTaak"),
+        task(6, name ),
         display(display),
         transmitter(transmitter),
         transfer(transfer),
-        inputControl(this),
+        inputControl(this, "InputControlTaak"),
         inputChannel(this, "inputChannel"),
         messageFlag(this, "messageFlag"),
         messagepool("messagepool"),

@@ -26,8 +26,8 @@ public:
     /// Default constructor for the KeypadTaak
     /// \details
     /// Names the task, starts a 100ms clock and binds the listener
-    KeypadTaak(KeypadListener *Keypadlistener):
-    task                (4, "KeypadTaak"),
+    KeypadTaak(const char * name, KeypadListener *Keypadlistener):
+    task(4, name),
     KeyClock(this, 100'000, "KeyClock"),
     Keypadlistener(Keypadlistener)
     {}

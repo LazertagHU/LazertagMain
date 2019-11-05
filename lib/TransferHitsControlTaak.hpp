@@ -9,7 +9,7 @@ class TransferHitsControlTaak : public rtos::task<> {
 private:
     rtos::flag TransferEnableFlag;
     rtos::pool< PlayerInfo > & entity_pool;
-    enum class states { IDLE };
+    enum class states { WAIT_FOR_TRIGGER };
     hit hits[100];
     states state;
     unsigned int hitAmount;
@@ -21,8 +21,12 @@ private:
     void main() override;
       
 public:
-    TransferHitsControlTaak( rtos::pool< PlayerInfo > & entity_pool ):
-        task( 8, "TransferHitsControlTaak" ),
+    /// \brief
+    /// The default constructor of TransferHitsControll
+    /// \details
+    /// Names its task and inits its flag and pool
+    TransferHitsControlTaak( const char * name, rtos::pool< PlayerInfo > & entity_pool ):
+        task( 8, name ),
         TransferEnableFlag( this, "TransferEnableFlag" ),
 	    entity_pool( entity_pool ),
         hitAmount(0)
