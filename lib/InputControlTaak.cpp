@@ -54,6 +54,9 @@ void InputControlTaak::main(){
                     case 'E':
                         Inputlistener->InputMessage(buttonid::eButton);
                         break;
+                    case 'F':
+                        Inputlistener->InputMessage(buttonid::fButton);
+                        break;
                     case '*':
                         Inputlistener->InputMessage(buttonid::starButton);
                         break;

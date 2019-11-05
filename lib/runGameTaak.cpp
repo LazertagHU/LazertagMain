@@ -19,6 +19,7 @@ void RunGameTaak::main()
     int                     countdown           = 0;
     int                     remainingGameTime   = 0;
     int                     delay               = 0;
+    int                     bullets             = 0;
 
     if(gameLeader == true){
         display.showMessage(0,'N');
@@ -71,6 +72,7 @@ void RunGameTaak::main()
             }
             break;
         }
+        
         case state_t::WAIT_FOR_PLAYER_NUMBER:{
             int input = waitForInput('N');
             if(input > 0 && input <= 15)
@@ -88,6 +90,7 @@ void RunGameTaak::main()
             currentState = state_t::IDLE;
             break;
         }
+
         case state_t::WAIT_FOR_WEAPON_NUMBER:{
             int input = waitForInput('A');
             if(input > 0 && input <= 15){
@@ -96,6 +99,8 @@ void RunGameTaak::main()
                 playerpool.write(player);
                 playerWeaponEntered = true;
                 display.showMessage(player.GetWeapon(input).name, 'G');
+                display.showMessage(player.GetWeapon(input).bullets, 'A');
+                bullets = player.GetWeapon(input).bullets;
             }
             else
             {
@@ -105,6 +110,7 @@ void RunGameTaak::main()
             currentState = state_t::IDLE;
             break;
         }
+
         case state_t::ENTER_TIME_REMAINING:{
             int input = waitForInput('T');
             if(input > 0 && input <= 15){
@@ -179,6 +185,7 @@ void RunGameTaak::main()
             }
             break;
         }
+
         case state_t::RUNGAME:{
             switch (currentSubState)
             {
@@ -189,6 +196,8 @@ void RunGameTaak::main()
                     msg = messagepool.read();
                     if(isHitMessage(msg))
                     {
+                        
+                        Speaker.HitSound();
                         auto player = playerpool.read();
                         auto damage = computeHit(msg);
                         // hwlib::cout << "damage: " << damage << "\n";
@@ -197,8 +206,9 @@ void RunGameTaak::main()
                         display.showMessage(player.GetHealth(), 'H');
                         playerpool.write(player);
                         delay = computeDeathDelay(msg);
+                        msg <<= 1; msg >>= (11+16);
                         delayTimer.set(delay);                                              /// check return type of computedelay
-                        display.showMessage("hit by", 'M');                           // nog dit uitvogelen
+                        display.showMessage(("hit by" + msg), 'M');                           // nog dit uitvogelen
                         currentSubState = substates_runGame_t::HIT;
 
                         if(playerpool.read().GetHealth() <= 0)
@@ -222,21 +232,42 @@ void RunGameTaak::main()
                     }
                     else
                     {
+                        display.showMessage(0, 'T');
                         currentState = state_t::GAME_OVER;
                     }
                 }
                 else
                 {
                     bnID = inputChannel.read();
-                    if(bnID == buttonid::eButton)
+                    if(bnID == buttonid::eButton && bullets > 0)
                     {
+                        Speaker.ShootSound();
                         transmitter.SendMessage(shootCommand);
                         delayTimer.set(computeShootDelay()); ///<<----
+                        bullets--;
+                        display.showMessage(bullets, 'A');
                         currentSubState = substates_runGame_t::WEAPON_COOLDOWN;
-                    }else{
+                    }
+                    else if(bnID == buttonid::eButton){
+                        display.showMessage("Out of ammo!", 'M');
+                    }
+                    else if(bnID == buttonid::fButton)
+                    {
+                        currentSubState = substates_runGame_t::WEAPON_RELOAD;
+                    }
+                    else{
                         // weet niet of dit moet
                     }
                 }
+                break;
+            }
+            case substates_runGame_t::WEAPON_RELOAD:{
+                display.showMessage("Reloading \nweapon...", 'M');
+                hwlib::wait_us(playerpool.read().GetWeapon(playerpool.read().GetCurrentWeapon()).weaponReloadTime);
+                bullets = playerpool.read().GetWeapon(playerpool.read().GetCurrentWeapon()).bullets;
+                display.showMessage(bullets, 'A');
+                display.showMessage("Alive!", 'M');
+                currentSubState = substates_runGame_t::ALIVE;
                 break;
             }
             case substates_runGame_t::WEAPON_COOLDOWN:{
@@ -251,8 +282,10 @@ void RunGameTaak::main()
                         display.showMessage(player.GetHealth(), 'H');
                         playerpool.write(player);
                         delay = computeDeathDelay(msg);
+                        //make this its own function
+                        msg <<= 1; msg >>= (11+16);
                         delayTimer.set(delay);                                              /// check return type of computedelay
-                        display.showMessage("hit by", 'M');                           // nog dit uitvogelen
+                        display.showMessage(("hit by " + msg), 'M');                           // nog dit uitvogelen
                         currentSubState = substates_runGame_t::HIT;
 
                         if(playerpool.read().GetHealth() <= 0)
@@ -310,6 +343,7 @@ void RunGameTaak::main()
             }
             break;
         }
+
         case state_t::GAME_OVER:{
             display.showMessage("Game over", 'M');
             bnID = inputChannel.read();
@@ -319,6 +353,7 @@ void RunGameTaak::main()
 
             break;
         }
+
         default:
             break;
         

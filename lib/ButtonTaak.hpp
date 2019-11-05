@@ -10,6 +10,7 @@ private:
     rtos::clock                                         ButtonClock;
     KeypadListener                                      *Keypadlistener;
     bool                                                buttonPressed = false;
+    bool                                                reloadPressed = false;
 
     /// \brief
     /// Main() for the ButtonTask

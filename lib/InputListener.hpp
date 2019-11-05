@@ -7,7 +7,7 @@ enum class buttonid
     zeroButton, oneButton, twoButton, threeButton,
     fourButton, fiveButton, sixButton, sevenButton,
     eightButton, nineButton, aButton, bButton,
-    cButton, dButton, eButton, starButton,
+    cButton, dButton, eButton, fButton, starButton,
     hastagButton
 };
 

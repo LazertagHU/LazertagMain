@@ -13,6 +13,7 @@
 #include "msg_decoder.hpp"
 #include "TransferHitsControlTaak.hpp"
 #include "InputControlTaak.hpp"
+#include "SpeakerTaak.hpp"
 
 class RunGameTaak : public rtos::task<>, public msg_listener, public InputListener
 {
@@ -27,12 +28,13 @@ private:
 
     enum class substates_runGame_t
     {
-        ALIVE, WEAPON_COOLDOWN, HIT
+        ALIVE, WEAPON_COOLDOWN, HIT, WEAPON_RELOAD
     };
 
     DisplayTaak&                display;
     SendTask&                   transmitter;
     TransferHitsControlTaak&    transfer;
+    SpeakerTaak&		        Speaker;
     InputControlTaak            inputControl;
     rtos::channel<buttonid, 10> inputChannel;
     rtos::flag                  messageFlag;
@@ -151,12 +153,14 @@ public:
         DisplayTaak & display, 
         SendTask& transmitter,
         TransferHitsControlTaak& transfer,
-        rtos::pool<PlayerInfo> & playerpool
+        rtos::pool<PlayerInfo> & playerpool,
+        SpeakerTaak & Speaker
     ):
         task(6, name ),
         display(display),
         transmitter(transmitter),
         transfer(transfer),
+	    Speaker(Speaker),
         inputControl(this, "InputControlTaak"),
         inputChannel(this, "inputChannel"),
         messageFlag(this, "messageFlag"),
