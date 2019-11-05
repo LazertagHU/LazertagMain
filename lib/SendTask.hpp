@@ -28,7 +28,7 @@ public:
     /// \details
     /// Names its task, binds its pin and inits the flag and the pool.
     SendTask( const char * name, hwlib::target::d2_36kHz led, hwlib::target::pin_out laser, int weapondelay ):
-        task( 7, name ),
+        task( 8, name ),
         led( led ),
         laser( laser ),
         weapondelay( weapondelay ),
