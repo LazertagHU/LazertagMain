@@ -15,6 +15,9 @@
 *.obj
 
 # Precompiled Headers
+*.bin
+*.elf
+*.map
 *.gch
 *.pch
 
