@@ -28,7 +28,7 @@ public:
     /// \details    
     /// Set task name, binds the listener, inits the channel and makes the button and keypad tasks
     InputControlTaak(InputListener *Inputlistener, const char * name):
-    task                (5, name),
+    task                (6, name),
     Inputlistener       (Inputlistener),
     InputChannel        (this, "InputChannel"),
     Keypadtaak          ("KeypadTaak", this),
