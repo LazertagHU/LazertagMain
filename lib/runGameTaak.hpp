@@ -157,7 +157,7 @@ public:
         display(display),
         transmitter(transmitter),
         transfer(transfer),
-        inputControl(this),
+        inputControl(this, "InputControlTaak"),
         inputChannel(this, "inputChannel"),
         messageFlag(this, "messageFlag"),
         messagepool("messagepool"),
