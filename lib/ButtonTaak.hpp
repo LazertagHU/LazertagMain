@@ -24,8 +24,8 @@ public:
     /// Default constructor for ButtonTaak
     /// \details
     /// This constructor names its task, starts its clock and binds the listener.
-    ButtonTaak(KeypadListener *Keypadlistener):
-    task                ("ButtonTaak"),
+    ButtonTaak(const char * name, KeypadListener *Keypadlistener):
+    task                (name),
     ButtonClock(this, 100'000, "ButtonClock"),
     Keypadlistener      (Keypadlistener)
     {}
