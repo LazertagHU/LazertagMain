@@ -36,7 +36,8 @@ int main(){
     auto display            = DisplayTaak("DisplayTaak");
     auto transfer           = TransferHitsControlTaak("TransferHitsControlTaak",playerpool);
     auto transmitter        = SendTask( "InputTask", led, lasersight, 1000 );
-    auto runGame            = RunGameTaak("RunGameTaak",display, transmitter, transfer, playerpool);   
+    auto Speaker            = SpeakerTaak("SpeakerTaak");
+    auto runGame            = RunGameTaak("RunGameTaak",display, transmitter, transfer, playerpool, Speaker);   
     auto decoder            = msg_decoder("decoder", runGame);
     auto pause_detection    = pause_detector("pause_detector", ir_sensor, decoder);
 

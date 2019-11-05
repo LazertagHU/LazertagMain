@@ -196,6 +196,8 @@ void RunGameTaak::main()
                     msg = messagepool.read();
                     if(isHitMessage(msg))
                     {
+                        
+                        Speaker.HitSound();
                         auto player = playerpool.read();
                         auto damage = computeHit(msg);
                         // hwlib::cout << "damage: " << damage << "\n";
@@ -239,6 +241,7 @@ void RunGameTaak::main()
                     bnID = inputChannel.read();
                     if(bnID == buttonid::eButton && bullets > 0)
                     {
+                        Speaker.ShootSound();
                         transmitter.SendMessage(shootCommand);
                         delayTimer.set(computeShootDelay()); ///<<----
                         bullets--;

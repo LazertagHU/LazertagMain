@@ -27,7 +27,7 @@ public:
     /// \details
     /// Names the task, starts a 100ms clock and binds the listener
     KeypadTaak(const char * name, KeypadListener *Keypadlistener):
-    task(4, name),
+    task(5, name),
     KeyClock(this, 100'000, "KeyClock"),
     Keypadlistener(Keypadlistener)
     {}
