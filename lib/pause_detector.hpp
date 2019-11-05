@@ -32,7 +32,7 @@ public:
         task( prio, name ),
         irsensor( irsensor ),
         listener(listener),
-        interval_clock( this, 100, "interval_clock")
+        interval_clock( this, 150, "interval_clock")
     {}
 };
 
