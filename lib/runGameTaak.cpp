@@ -128,7 +128,7 @@ void RunGameTaak::main()
                 transmitter.SendMessage(setTimeCommand);
             }else if( bnID == buttonid::starButton){
                 countdown = 30;
-                display.showMessage(countdown, '30');
+                display.showMessage(countdown, 'T');
                 display.showMessage("press * to send start command", 'M');
                 computeStartCommand(countdown, startCommand);
                 currentState = state_t::START_GAME_TRANSMISSION_STATE;
