@@ -128,6 +128,7 @@ void RunGameTaak::main()
                 transmitter.SendMessage(setTimeCommand);
             }else if( bnID == buttonid::starButton){
                 countdown = 30;
+                display.showMessage(countdown, '30');
                 display.showMessage("press * to send start command", 'M');
                 computeStartCommand(countdown, startCommand);
                 currentState = state_t::START_GAME_TRANSMISSION_STATE;
@@ -174,6 +175,7 @@ void RunGameTaak::main()
                 display.showMessage("Alive", 'M');
                 computeShootCommand(shootCommand);
                 currentState = state_t::RUNGAME;
+                messageFlag.clear();
             }
             break;
         }
@@ -189,6 +191,7 @@ void RunGameTaak::main()
                     {
                         auto player = playerpool.read();
                         auto damage = computeHit(msg);
+                        // hwlib::cout << "damage: " << damage << "\n";
                         player.SetHealth((player.GetHealth() - damage));   // set lives
                         transfer.AddHit(getEnemyID(msg) ,damage, remainingGameTime);
                         display.showMessage(player.GetHealth(), 'H');
@@ -463,7 +466,8 @@ bool RunGameTaak::isHitMessage(uint32_t message)
     auto id = playerpool.read().GetPlayerID();
     message <<=17;
     message >>=27;
-    if(((message) & id) != id ){        // if player id from message does not equal own plater id, it means that the player is shot.
+    // hwlib::cout << "Message: " << message << " compare: " << (message != id) << " ID: " << id << "\n";
+    if(message!= id ){        // if player id from message does not equal own plater id, it means that the player is shot.
         return true;
     }
     return false;
