@@ -113,7 +113,7 @@ void SpeakerTaak::main(){
                         hwlib::wait_us(half_period);
                         lsp.write(0);
                         lsp.flush();
-                        hSpeakerTimer.set(half_period);
+                        SpeakerTimer.set(half_period);
                         wait(SpeakerTimer);
                         if(end < hwlib::now_us()){
                             SpeakerState = SpeakerState_t::WAIT_FOR_INPUT;
