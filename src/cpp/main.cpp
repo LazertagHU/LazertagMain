@@ -10,6 +10,7 @@ int main(){
     /* constructing pins */
     auto lasersight         = hwlib::target::pin_out( hwlib::target::pins::d1 );
     auto led                = hwlib::target::d2_36kHz();
+    auto reload             = hwlib::target::pin_in( hwlib::target::pins::d4);
 
     
     auto ir_sensor          = target::pin_in( target::pins::d8 );   

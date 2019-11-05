@@ -40,7 +40,7 @@ private:
     rtos::pool<PlayerInfo>&     playerpool;
     rtos::clock                 secondClock;
     rtos::timer                 delayTimer;
-    buttonid                    bnID;
+    buttonid                    bnID; 
 
     /// \brief
     /// The main() of the RunGame task.

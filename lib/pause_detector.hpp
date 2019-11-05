@@ -10,7 +10,7 @@ protected:
     hwlib::pin_in&     irsensor;
     pause_listener&    listener;
     rtos::clock        interval_clock;
-    hwlib::target::pin_out debugPin = hwlib::target::pin_out( hwlib::target::pins::d7 );
+    // hwlib::target::pin_out debugPin = hwlib::target::pin_out( hwlib::target::pins::d7 );
 
     /// \brief
     /// Main() of the pause_detector task.
@@ -32,7 +32,7 @@ public:
         task( 0, name ),
         irsensor( irsensor ),
         listener(listener),
-        interval_clock( this, 100, "interval_clock")
+        interval_clock( this, 200, "interval_clock")
     {}
 };
 
