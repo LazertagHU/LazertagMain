@@ -1,4 +1,3 @@
-//////////////////////////////////////////////////////////////
 //DISPLAYTAAK.HPP 
 //Themaproject Devices, groep 2
 //Code is bedoelt voor de display van een lasertag spel
@@ -33,8 +32,6 @@
 //                                  (dit moet elke seconde worden aangepast)
 //              G(Vak Rechtsboven): Bedoelt voor het aangeven van het Wapentype
 //
-//////////////////////////////////////////////////////////////
-
 
 
 #ifndef _OLEDTAAK_HPP
@@ -44,6 +41,7 @@
 #include "../../hwlib/library/hwlib.hpp"
 #include "rtos.hpp"
 #include "../../rtos/rtos.hpp"   
+<<<<<<< HEAD
                                                                                     //////////////////////////////////////////////////////////////                                                               //TypeMessage:  een struct die meerdere types aan messages
 struct typeMessage{                                                                 //              
     int         intToWrite;                                                         //- ToWrite:      Bevat de INT voor het OLEDscherm 
@@ -57,10 +55,24 @@ private:                                                                        
     rtos::channel<typeMessage, 10>         inputChannel;                             //  kan beslissen waar op het scherm de data 
                                                                                     //  verwerkt moet worden
 public:                                                                             //////////////////////////////////////////////////////////////                
+=======
+                                                                
+struct TypeMessage{                                                                               
+    int         IntToWrite;     
+    const char* StringToWrite;            
+    char        Type;                          
+};
+class DisplayTaak : public rtos::task<>{
+  private:   
+      rtos::channel<TypeMessage, 10>         inputChannel; 
+  
+  public:
+>>>>>>> f7c7a7d312dbcb45a6f4fd373e7cbb1b676286ee
     /// \brief
     /// Default constructor for DisplayTaak
     /// \details    
     /// Constructs display task with a name and a channel for messages to be displayed
+<<<<<<< HEAD
     displayTaak(int prio, const char * name):                                                                  //- CLASS CONSTRUCTOR
     task                (prio, name),                                            //- creeer de rtos::task
     inputChannel        (this, "inputChannel")                                      //- creeer de rtos::Channel
@@ -78,6 +90,23 @@ public:                                                                         
     /// Public function to write messages to. This function internally uses a channel as waitable to save this incoming data.                                                                                //////////////////////////////////////////////////////////////
     void showMessage(int message, char oledRec);                                       //////////////////////////////////////////////////////////////
 private:
+=======
+    DisplayTaak(int prio, const char * name):
+    task                (prio, name),
+    inputChannel        (this, "inputChannel")
+    {}
+    /// \brief
+    /// Interface for writing messages to the display
+    /// \details    
+    /// Public function to write messages to. This function internally uses a channel as waitable to save this incoming data.                                                                              
+    void showMessage(const char* Message, char oledRec); 
+    /// \brief
+    /// Interface for writing messages to the display
+    /// \details    
+    /// Public function to write messages to. This function internally uses a channel as waitable to save this incoming data.  
+  void showMessage(int Message, char oledRec);
+  private:
+>>>>>>> f7c7a7d312dbcb45a6f4fd373e7cbb1b676286ee
     /// \brief
     /// Main() for the display task.
     /// \details    
@@ -85,9 +114,7 @@ private:
     /// with the stream operator we can write in these terminals to 
     /// dedicaded sectors of the display. When the tasks has something 
     /// in its channel it writes to one of these terminals based on the given type.                                                                            //    
-    void main() override;                                                           //De rtos::task heeft zijn eigen main die constant draait
-                                                                                    ////////////////////////////////////////////////////////////////
-    
+    void main() override;  
     
 };
 
