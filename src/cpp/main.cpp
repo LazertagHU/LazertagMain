@@ -24,19 +24,17 @@ int main(){
     /* constructing player pool */
     auto player = playerInfo();
     auto hits = hit();
-    // HWLIB_TRACE << "player_t: " << sizeof(PlayerInfo);
-    // HWLIB_TRACE << "hit_t: " <<sizeof(hit);
-    // HWLIB_TRACE << "playerObj: " << sizeof(player);
-    // HWLIB_TRACE << "hitObj: " <<sizeof(hit);
-    // HWLIB_TRACE;
+    
+    
 
     auto playerpool         = rtos::pool<playerInfo>("playerpool");
 
     auto display            = displayTaak(8, "DisplayTaak");
-    auto transmitter        = sendTask(2, "InputTask", led, laserSight, 1000 );
+    //auto transfer           = TransferHitsControlTaak(9, "TransferHitsControlTaak",playerpool);
+    auto transmitter        = sendTask(1, "sendTask", led, laserSight, 1000 );
     auto speaker            = speakerTaak(4, "SpeakerTaak");
     auto runGame            = runGameTaak(6, "RunGameTaak",display, transmitter, playerpool, speaker);   
-    auto decoder            = msg_decoder(1, "decoder", runGame);
+    auto decoder            = msg_decoder(2, "decoder", runGame);
     auto pause_detection    = pause_detector(0, "pause_detector", ir_sensor, decoder);
 
     /* run rtos */

@@ -1,6 +1,7 @@
 #ifndef RUN_GAME_TAAK_HPP
 #define RUN_GAME_TAAK_HPP
 
+#include "SpeakerTaak.hpp"
 #include "DisplayTaak.hpp"
 #include "hwlib.hpp"
 #include "../../hwlib/library/hwlib.hpp"
@@ -11,7 +12,6 @@
 #include "SendTask.hpp"
 #include "pause_detector.hpp"
 #include "msg_decoder.hpp"
-//#include "TransferHitsControlTaak.hpp"
 #include "InputControlTaak.hpp"
 #include "SpeakerTaak.hpp"
 #include "hit.hpp"
@@ -58,7 +58,7 @@ private:
     uint32_t                    setTimeCommand      = 0b1'00000'00000'00000'1'00000'00000'00000;
     uint32_t                    shootCommand        = 0b1'00000'00000'00000'1'00000'00000'00000;
     uint32_t                    msg;
-    bool                        gameLeader          = false;
+    bool                        gameLeader          = true;
     int                         countdown           = 0;
     int                         remainingGameTime   = 0;
     int                         bullets             = 0;
