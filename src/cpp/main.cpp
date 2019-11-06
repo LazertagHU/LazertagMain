@@ -19,17 +19,11 @@ int main(){
     tsop_gnd.flush();
     tsop_vdd.flush();
     
-    /* constructing player pool */
-    auto player = playerInfo();
-    auto hits = hit();
-    auto playerpool         = rtos::pool<playerInfo>("playerpool");
-
-
     /* constructing tasks */
     auto display            = displayTaak(8, "DisplayTaak");
     auto transmitter        = sendTask(1, "sendTask", led, laserSight, 1000 );
     auto speaker            = speakerTaak(4, "SpeakerTaak");
-    auto runGame            = runGameTaak(6, "RunGameTaak",display, transmitter, playerpool, speaker);   
+    auto runGame            = runGameTaak(6, "RunGameTaak",display, transmitter, speaker);   
     auto decoder            = msg_decoder(2, "decoder", runGame);
     auto pause_detection    = pause_detector(0, "pause_detector", ir_sensor, decoder);
 

@@ -39,13 +39,12 @@ private:
 
     displayTaak&                display;
     sendTask&                   transmitter;
-    //TransferHitsControlTaak&    transfer;
     speakerTaak&		        speaker;
     inputControlTaak            inputControl;
     rtos::channel<buttonid, 10> inputChannel;
     rtos::flag                  messageFlag;
     rtos::pool<uint32_t>        messagepool;
-    rtos::pool<playerInfo>&     playerpool;
+    playerInfo                  player;
     rtos::clock                 secondClock;
     rtos::timer                 delayTimer;
     buttonid                    bnID;
@@ -208,24 +207,21 @@ public:
         const char * name,
         displayTaak & display, 
         sendTask& transmitter,
-        //TransferHitsControlTaak& transfer,
-        rtos::pool<playerInfo> & playerpool,
         speakerTaak & speaker
     ):
         task(prio, name ),
         display(display),
         transmitter(transmitter),
-        //transfer(transfer),
 	    speaker(speaker),
         inputControl(7, this, "InputControlTaak"),
         inputChannel(this, "inputChannel"),
         messageFlag(this, "messageFlag"),
         messagepool("messagepool"),
-        playerpool(playerpool),
         secondClock(this, 1'000'000, "secondClock"),
         delayTimer(this, "delayTimer")
     {
         hitAmount = 0;
+        player = playerInfo();
     }
 
     /// \brief
