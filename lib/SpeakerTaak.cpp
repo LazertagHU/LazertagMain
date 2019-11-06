@@ -18,7 +18,7 @@ void SpeakerTaak::main(){
     int             half_period;
     unsigned int    end;
     unsigned int    TempFreq;
-    const std::array<noot, 2> Shooting{ noot{200, 6 0000}, noot{1500, 695000} };
+    const std::array<noot, 2> Shooting{ noot{200, 100000}, noot{1500, 695000} };
     const std::array<noot, 2> Hit{ noot{200, 100000}, noot{130, 600000} };
     
     for(;;){
