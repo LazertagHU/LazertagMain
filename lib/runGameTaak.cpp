@@ -7,6 +7,7 @@ void runGameTaak::preGame(){
     bool                        playerIDEntered     = false;
     bool                        gameTimeEntered     = false;
     bool                        loop                = true;
+    
     if(gameLeader == true){
             display.showMessage(0,'N');
             auto player = playerpool.read();
@@ -185,17 +186,18 @@ void runGameTaak::gameRunning(){
                 msg = messagepool.read();
                 if(isHitMessage(msg))
                 {
-                    display.showMessage("hit", 'M');                
+                    speaker.hitSound();
+                    display.showMessage("hit", 'M');       
                     auto player = playerpool.read();
                     auto damage = computeHit(msg);
                     auto lives = player.getHealth() - damage;
+                    addHit(getEnemyID(msg) ,damage, remainingGameTime);      
                     if(lives <= 0){
                         player.setHealth(0); 
                         display.showMessage(player.getHealth(), 'H');
                         currentState = gameRunning_states_t::GAME_OVER;
                     }else{
                         player.setHealth(lives);
-                        addHit(getEnemyID(msg) ,damage, remainingGameTime);
                         display.showMessage(player.getHealth(), 'H');
                         playerpool.write(player);
                         delayTimer.set(computeDeathDelay(msg));                                              /// check return type of computedelay
@@ -266,17 +268,19 @@ void runGameTaak::gameRunning(){
                 msg = messagepool.read();
                 if(isHitMessage(msg))
                 {
+                    speaker.hitSound();
                     display.showMessage("hit", 'M');                
                     auto player = playerpool.read();
                     auto damage = computeHit(msg);
                     auto lives = player.getHealth() - damage;
+                    addHit(getEnemyID(msg) ,damage, remainingGameTime);
                     if(lives <= 0){
                         player.setHealth(0); 
                         display.showMessage(player.getHealth(), 'H');
                         currentState = gameRunning_states_t::GAME_OVER;
                     }else{
                         player.setHealth(lives);
-                        addHit(getEnemyID(msg) ,damage, remainingGameTime);
+                        
                         display.showMessage(player.getHealth(), 'H');
                         playerpool.write(player);
                         delayTimer.set(computeDeathDelay(msg));                                              /// check return type of computedelay
@@ -294,17 +298,18 @@ void runGameTaak::gameRunning(){
                 msg = messagepool.read();
                 if(isHitMessage(msg))
                 {
+                    speaker.hitSound();
                     display.showMessage("hit", 'M');                
                     auto player = playerpool.read();
                     auto damage = computeHit(msg);
                     auto lives = player.getHealth() - damage;
+                    addHit(getEnemyID(msg) ,damage, remainingGameTime);
                     if(lives <= 0){
                         player.setHealth(0); 
                         display.showMessage(player.getHealth(), 'H');
                         currentState = gameRunning_states_t::GAME_OVER;
                     }else{
                         player.setHealth(lives);
-                        addHit(getEnemyID(msg) ,damage, remainingGameTime);
                         display.showMessage(player.getHealth(), 'H');
                         playerpool.write(player);
                         delayTimer.set(computeDeathDelay(msg));                                              /// check return type of computedelay
