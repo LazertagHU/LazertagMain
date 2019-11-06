@@ -9,9 +9,7 @@ void runGameTaak::preGame(){
     bool                        loop                = true;
     if(gameLeader == true){
             display.showMessage(0,'N');
-            auto player = playerpool.read();
             player.setPlayerID(0);
-            playerpool.write(player);
             playerIDEntered = true;
         }
 
@@ -63,9 +61,7 @@ void runGameTaak::preGame(){
             int input = waitForInput('N');
             if(input > 0 && input <= 15)
             {
-                auto player = playerpool.read();
                 player.setPlayerID(input);
-                playerpool.write(player);
                 playerIDEntered = true;
             }
             else
@@ -80,9 +76,7 @@ void runGameTaak::preGame(){
         case preGame_states_t::WAIT_FOR_WEAPON_NUMBER:{
             int input = waitForInput('A');
             if(input > 0 && input <= 15){
-                auto player = playerpool.read();
                 player.setWeapon(input);
-                playerpool.write(player);
                 playerWeaponEntered = true;
                 display.showMessage(player.getWeapon(input).name, 'G');
                 display.showMessage(player.getWeapon(input).bullets, 'A');
@@ -157,10 +151,8 @@ void runGameTaak::preGame(){
             if(countdown > 1){
                 display.showMessage(--countdown, 'T');
             }else{
-                auto player = playerpool.read();
                 player.setHealth(100); // set lives
-                playerpool.write(player);
-                display.showMessage(playerpool.read().getHealth(), 'H');
+                display.showMessage(player.getHealth(), 'H');
                 display.showMessage("Alive", 'M');
                 computeShootCommand(shootCommand);
                 loop = 0;
@@ -186,7 +178,6 @@ void runGameTaak::gameRunning(){
                 if(isHitMessage(msg))
                 {
                     display.showMessage("hit", 'M');                
-                    auto player = playerpool.read();
                     auto damage = computeHit(msg);
                     auto lives = player.getHealth() - damage;
                     if(lives <= 0){
@@ -197,7 +188,6 @@ void runGameTaak::gameRunning(){
                         player.setHealth(lives);
                         addHit(getEnemyID(msg) ,damage, remainingGameTime);
                         display.showMessage(player.getHealth(), 'H');
-                        playerpool.write(player);
                         delayTimer.set(computeDeathDelay(msg));                                              /// check return type of computedelay
                         currentState = gameRunning_states_t::HIT;   
                     }
@@ -236,7 +226,7 @@ void runGameTaak::gameRunning(){
                 else if(bnID == buttonid::fButton)
                 {
                     display.showMessage("Reloading \nweapon...", 'M');
-                    delayTimer.set(playerpool.read().getWeapon(playerpool.read().getCurrentWeapon()).weaponReloadTime);
+                    delayTimer.set(player.getWeapon(player.getCurrentWeapon()).weaponReloadTime);
                     currentState = gameRunning_states_t::WEAPON_RELOAD;
                 }
             }
@@ -245,7 +235,7 @@ void runGameTaak::gameRunning(){
         case gameRunning_states_t::WEAPON_RELOAD:{
             auto evt = wait(delayTimer + messageFlag + secondClock);
             if(evt == delayTimer){
-                bullets = playerpool.read().getWeapon(playerpool.read().getCurrentWeapon()).bullets;
+                bullets = player.getWeapon(player.getCurrentWeapon()).bullets;
                 display.showMessage(bullets, 'A');
                 display.showMessage("Alive!", 'M');
                 currentState = gameRunning_states_t::ALIVE;
@@ -267,7 +257,6 @@ void runGameTaak::gameRunning(){
                 if(isHitMessage(msg))
                 {
                     display.showMessage("hit", 'M');                
-                    auto player = playerpool.read();
                     auto damage = computeHit(msg);
                     auto lives = player.getHealth() - damage;
                     if(lives <= 0){
@@ -278,7 +267,6 @@ void runGameTaak::gameRunning(){
                         player.setHealth(lives);
                         addHit(getEnemyID(msg) ,damage, remainingGameTime);
                         display.showMessage(player.getHealth(), 'H');
-                        playerpool.write(player);
                         delayTimer.set(computeDeathDelay(msg));                                              /// check return type of computedelay
                         currentState = gameRunning_states_t::HIT;   
                     }
@@ -295,7 +283,6 @@ void runGameTaak::gameRunning(){
                 if(isHitMessage(msg))
                 {
                     display.showMessage("hit", 'M');                
-                    auto player = playerpool.read();
                     auto damage = computeHit(msg);
                     auto lives = player.getHealth() - damage;
                     if(lives <= 0){
@@ -306,7 +293,6 @@ void runGameTaak::gameRunning(){
                         player.setHealth(lives);
                         addHit(getEnemyID(msg) ,damage, remainingGameTime);
                         display.showMessage(player.getHealth(), 'H');
-                        playerpool.write(player);
                         delayTimer.set(computeDeathDelay(msg));                                              /// check return type of computedelay
                         currentState = gameRunning_states_t::HIT;   
                     }
@@ -403,10 +389,8 @@ void runGameTaak::main()
 
 
 void runGameTaak::write_hits(){
-    playerInfo player = playerpool.read();
-    int playerID = player.getPlayerID();
                 
-    hwlib::cout << "PlayerID: " << playerID << "\n";
+    hwlib::cout << "PlayerID: " << player.getPlayerID() << "\n";
     if( hitAmount != 0 ){
         for( unsigned int i = hitAmount; i > 0; i-- ){
             hwlib::cout << "Enemy: " << hits[i-1].enemyID << ", Damage: " << hits[i-1].damage << ", Time: " << hits[i-1].time << "\n";
@@ -440,8 +424,8 @@ uint32_t runGameTaak::computeCountdown(uint32_t msg)
 };
 
 void runGameTaak::computeShootCommand(uint32_t & shootcommand){
-    auto id     = playerpool.read().getPlayerID();
-    auto wepid  = playerpool.read().getCurrentWeapon();
+    auto id     = player.getPlayerID();
+    auto wepid  = player.getCurrentWeapon();
     
     shootcommand |= (id << 26);
     shootcommand |= (id << 10);
@@ -559,7 +543,7 @@ bool runGameTaak::isHitMessage(uint32_t message)
     This funciton calculates wether the player has been shot by an enemy.
     If the player shoots himself, the function will return false;
     */
-    auto id = playerpool.read().getPlayerID();
+    auto id = player.getPlayerID();
     message <<=17;
     message >>=27;
     // hwlib::cout << "Message: " << message << " compare: " << (message != id) << " ID: " << id << "\n";
@@ -579,7 +563,7 @@ int runGameTaak::computeHit(uint32_t message)
     message <<=22;
     message >>= 27; // now contains weapon id;
     
-    return playerpool.read().getWeapon(message).damage;
+    return player.getWeapon(message).damage;
 };
 
 int runGameTaak::computeDeathDelay(uint32_t message)
@@ -592,7 +576,7 @@ int runGameTaak::computeDeathDelay(uint32_t message)
     message <<=22;
     message >>= 27; // now contains weapon id;
 
-    return playerpool.read().getWeapon(message).deathDelay;
+    return player.getWeapon(message).deathDelay;
 };
 
 int runGameTaak::computeShootDelay()
@@ -602,9 +586,9 @@ int runGameTaak::computeShootDelay()
     it calculates the weapon id the player has shot with
     returns the specific delay that is attached to that weapon.
     */
-    auto wepNr = playerpool.read().getCurrentWeapon();
+    auto wepNr = player.getCurrentWeapon();
 
-    return playerpool.read().getWeapon(wepNr).weaponCooldown;
+    return player.getWeapon(wepNr).weaponCooldown;
 };
 
 bool runGameTaak::isStartMessage(uint32_t message){
