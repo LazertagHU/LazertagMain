@@ -5,7 +5,7 @@ void msg_decoder::main(){
     uint32_t msg = 0;
     for(;;){
         reset_timer.set(5000);
-        auto p = wait(pauses + reset_timer);
+        auto p = wait(pauseChannel + reset_timer);
         if (p == reset_timer)
         {
             n = 0; msg = 0;
@@ -13,7 +13,7 @@ void msg_decoder::main(){
             continue;
         }
         else{
-            int read = pauses.read();
+            int read = pauseChannel.read();
         
             if (n >= 32)
             {
