@@ -31,17 +31,8 @@ int main(){
     // HWLIB_TRACE;
 
     auto playerpool         = rtos::pool<playerInfo>("playerpool");
-    
-    /* constructing tasks */
-    // auto display            = DisplayTaak(8, "DisplayTaak");
-    // auto transfer           = TransferHitsControlTaak(9, "TransferHitsControlTaak",playerpool);
-    // auto transmitter        = SendTask(2, "InputTask", led, lasersight, 1000 );
-    // auto Speaker            = SpeakerTaak(3, "SpeakerTaak");
-    // auto runGame            = RunGameTaak(6, "RunGameTaak",display, transmitter, transfer, playerpool, Speaker);   
-
 
     auto display            = displayTaak(8, "DisplayTaak");
-    //auto transfer           = TransferHitsControlTaak(9, "TransferHitsControlTaak",playerpool);
     auto transmitter        = sendTask(2, "InputTask", led, laserSight, 1000 );
     auto speaker            = speakerTaak(4, "SpeakerTaak");
     auto runGame            = runGameTaak(6, "RunGameTaak",display, transmitter, playerpool, speaker);   

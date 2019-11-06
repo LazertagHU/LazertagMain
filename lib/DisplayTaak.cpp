@@ -47,7 +47,7 @@ void displayTaak::main(){
     ammoRectangle.draw(wRectangle);   
     healthRectangle.draw(wRectangle);  
     timeRectangle.draw(wRectangle); 
-    oled.flush();
+    //oled.flush();
     enum class display_state_t        {IDLE};
     display_state_t         state   = display_state_t::IDLE;
  

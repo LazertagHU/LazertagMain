@@ -20,16 +20,21 @@ class runGameTaak : public rtos::task<>, public msg_listener, public inputListen
 {
 private:
 
-    enum class state_t 
+    enum class preGame_states_t 
     {
         IDLE, WAIT_FOR_PLAYER_NUMBER, WAIT_FOR_WEAPON_NUMBER, 
         ENTER_TIME_REMAINING, SEND_COMMAND_STATE,
-        START_GAME_TRANSMISSION_STATE, AFTELLEN, RUNGAME, GAME_OVER 
+        START_GAME_TRANSMISSION_STATE, AFTELLEN
     };
 
-    enum class substates_runGame_t
+    enum class gameRunning_states_t
     {
-        ALIVE, WEAPON_COOLDOWN, HIT, WEAPON_RELOAD
+        ALIVE, HIT, WEAPON_RELOAD, WEAPON_COOLDOWN, GAME_OVER
+    };
+
+    enum class postGame_states_t
+    {
+        IDLE
     };
 
     displayTaak&                display;
@@ -44,8 +49,42 @@ private:
     rtos::clock                 secondClock;
     rtos::timer                 delayTimer;
     buttonid                    bnID;
-    hit                         hits[100];
+
+
+    hit                         hits[20];
     unsigned int                hitAmount;
+    uint32_t                    command             = 0b1'00000'10000'00000'1'00000'10000'00000;
+    uint32_t                    startCommand        = 0b1'00000'10000'00000'1'00000'10000'00000;
+    uint32_t                    setTimeCommand      = 0b1'00000'00000'00000'1'00000'00000'00000;
+    uint32_t                    shootCommand        = 0b1'00000'00000'00000'1'00000'00000'00000;
+    uint32_t                    msg;
+    bool                        gameLeader          = false;
+    int                         countdown           = 0;
+    int                         remainingGameTime   = 0;
+    int                         bullets             = 0;
+
+    /// \brief
+    /// This Function handles the pregame functionality
+    /// \details
+    /// With this function, you can set the player id ( unless you are the game leader. In this case the player id will be #0), 
+    /// weapon type you want to play with, and the game leader can set the game duration and start command.
+    /// The slaves can receive the game time and start command and will start at the same time as the other salves due to
+    /// a modulated game start message in which the countdown is located.
+    void preGame();
+
+    /// \brief
+    /// Main function for the lasergame
+    /// \details
+    /// The player can either be alive, hit, reloading and on a shoot cooldown. This function handles all this and keeps track of the score 
+    /// and gametime. When either the player's HP is reduced to 0 or the game time is zero, this function will end.
+    void gameRunning();
+
+    /// \brief
+    /// Post game function for the lasergame
+    /// \details
+    /// For now, this function handles only the transferring of the hits to a terminal. More functionality can be added later.
+    /// If the reloadbutton is pressed, the game will be restarted.
+    void postGame();
 
     /// \brief
     /// The main() of the RunGame task.
@@ -73,7 +112,6 @@ private:
     /// 
     /// This function decodes that message and translates it in to the proper
     /// countdown.
-    ///
     uint32_t computeCountdown(uint32_t msg);
 
     /// \brief
@@ -94,7 +132,6 @@ private:
     /// The user has the option to return when no numbers are entered
     /// or when one number is entered. this way the user can return
     /// 1 - 9 and then return out of the function.
-    ///
     int waitForInput(char place);
    
     /// \brief
@@ -123,6 +160,9 @@ private:
     int computeDeathDelay(uint32_t message);
 
 
+    /// \brief
+    /// This function computes the shootcommand according to the weapon 
+    /// and player id that the player has been chosen.
     void computeShootCommand(uint32_t & shootcommand);
 
 
@@ -144,6 +184,19 @@ private:
     /// \brief
     /// Extracts and returns the enemyID from message.
     uint32_t getEnemyID(uint32_t message);
+
+    /// \brief
+    /// Funtion that writes hits
+    /// \details
+    /// Writes all the hits to the terminal with enemy id damage and time
+    /// if no hits were registered writes no hits registered
+    void write_hits();
+
+    /// \brief
+    /// Function to add a hit to the hit array
+    /// \details
+    /// The hit array is used to keep track of whom the player has been hit by. With this function a hit can be added to the array
+    void addHit( int enemyID, int damage, int time );
     
 
 public:
@@ -186,10 +239,6 @@ public:
     /// \details    
     /// Public function to write commands to. This function internally uses a channel as waitable to save this incoming data.  
     void inputMessage(buttonid id)override;
-
-    void write_hits();
-
-    void addHit( int enemyID, int damage, int time );
 };
 
 
