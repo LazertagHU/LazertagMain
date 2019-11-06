@@ -1,12 +1,12 @@
 #include "SendTask.hpp"
 
 // Writes the CommandID to the sendpool and sets the SendFlag
-void SendTask::SendMessage( uint32_t CommandID ){
-    sendpool.write( CommandID );
-    SendFlag.set();
+void sendTask::sendMessage( uint32_t commandID ){
+    sendpool.write( commandID );
+    sendFlag.set();
 }
 
-void SendTask::main(){
+void sendTask::main(){
     state = states::IDLE;
     int i;
     uint32_t message;
@@ -16,7 +16,7 @@ void SendTask::main(){
             // Waits for the SendFlag sets i to 31 reads the sendpool for the message and shifts the message i times
             // to read the bit at the given position. After this it checks the bits value and sends it to the next state.
             case states::IDLE:
-                wait( SendFlag );
+                wait( sendFlag );
                 i = 31;
                 message = sendpool.read();
                 bit = (message >> i) & 1;

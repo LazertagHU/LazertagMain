@@ -11,14 +11,14 @@ enum class buttonid
     hastagButton
 };
 
-class InputListener{
+class inputListener{
 private:
 
     
 public:
     /// \brief
     /// Purely virtual and abstract class used for the listener patern.
-    virtual void InputMessage(buttonid id) = 0;
+    virtual void inputMessage(buttonid id) = 0;
 
 };
 
