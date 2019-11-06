@@ -47,34 +47,12 @@ struct typeMessage{                                                             
     const char* stringToWrite;                                                      //- StringToWrite Bevat de std::string voor het scherm
     char        type;                                                               //- Type:         Beslist voor welk OLEDschermdeel de tekst bedoel is
 };                                                                                  //
-                                                                                    //////////////////////////////////////////////////////////////
-class displayTaak : public rtos::task<>{                                            //- Rtos::task voor de OLED display   
-private:                                                                            //- Deze task zal constant wachten op nieuwe data,
-                                                                                    //  en het meegegeven data type, waarmee de task zelf    
-    rtos::channel<typeMessage, 10>         inputChannel;                             //  kan beslissen waar op het scherm de data 
-                                                                                    //  verwerkt moet worden
-public:                                                                             //////////////////////////////////////////////////////////////                
-    /// \brief
-    /// Default constructor for DisplayTaak
-    /// \details    
-    /// Constructs display task with a name and a channel for messages to be displayed
-    displayTaak(int prio, const char * name):                                                                  //- CLASS CONSTRUCTOR
-    task                (prio, name),                                            //- creeer de rtos::task
-    inputChannel        (this, "inputChannel")                                      //- creeer de rtos::Channel
-    {}                                                                              //
-                                                                                    //////////////////////////////////////////////////////////////
-    /// \brief
-    /// Interface for writing messages to the display
-    /// \details    
-    /// Public function to write messages to. This function internally uses a channel as waitable to save this incoming data.                                                                                //
-    void showMessage(const char* message, char oledRec);                            //- Write de struct in de channel. Nu kan de task het verwerken
-    
-    /// \brief
-    /// Interface for writing messages to the display
-    /// \details    
-    /// Public function to write messages to. This function internally uses a channel as waitable to save this incoming data.                                                                                //////////////////////////////////////////////////////////////
-    void showMessage(int message, char oledRec);                                       //////////////////////////////////////////////////////////////
-private:
+                                                                                    
+class displayTaak : public rtos::task<>{                                            
+private:                                                                            
+                                                                                   
+    rtos::channel<typeMessage, 10>         inputChannel;
+   
     /// \brief
     /// Main() for the display task.
     /// \details    
@@ -82,8 +60,32 @@ private:
     /// with the stream operator we can write in these terminals to 
     /// dedicaded sectors of the display. When the tasks has something 
     /// in its channel it writes to one of these terminals based on the given type.                                                                            //    
-    void main() override;  
+    void main() override;                
+                                                                                  
+public:                                                                            
+    /// \brief
+    /// Default constructor for DisplayTaak
+    /// \details    
+    /// Constructs display task with a name and a channel for messages to be displayed
+    displayTaak(
+        int prio, 
+        const char * name
+    ):                                                                  
+        task(prio, name),                                          
+        inputChannel(this, "inputChannel")                                    
+    {}                                                 
+
+    /// \brief
+    /// Interface for writing messages to the display
+    /// \details    
+    /// Public function to write messages to. This function internally uses a channel as waitable to save this incoming data.                                                                                //
+    void showMessage(const char* message, char oledRec);                            
     
+    /// \brief
+    /// Interface for writing messages to the display
+    /// \details    
+    /// Public function to write messages to. This function internally uses a channel as waitable to save this incoming data.                                                                                //////////////////////////////////////////////////////////////
+    void showMessage(int message, char oledRec);
 };
 
 

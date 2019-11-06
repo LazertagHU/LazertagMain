@@ -21,16 +21,6 @@ void playerInfo::setPlayerID( unsigned int newPlayerID ){
     playerID = newPlayerID; 
 }
 
-//hit* PlayerInfo::GetHits(){ 
-//    return hits; 
-//}
-
-//void PlayerInfo::AddHit( int EnemyID, int Damage, int Time ){
-//    hit newHit{ EnemyID, Damage, Time }; //not safe, out of [] index danger
-//    hits[hitAmount] = newHit;
-//    hitAmount++;
-//}
-
 void playerInfo::setHealth( int newHealth ){ 
     health = newHealth; 
 }

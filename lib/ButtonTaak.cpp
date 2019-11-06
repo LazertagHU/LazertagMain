@@ -1,10 +1,10 @@
 #include "ButtonTaak.hpp"
 
 void buttonTaak::main(){
-    enum class ButtonState_t        {WAIT_FOR_INPUT, PRESSED};
-    ButtonState_t buttonState       = ButtonState_t::WAIT_FOR_INPUT;
-    auto button = hwlib::target::pin_in(hwlib::target::pins::d3);
-    auto reloadButton = hwlib::target::pin_in(hwlib::target::pins::d4);
+    enum class ButtonState_t    {WAIT_FOR_INPUT, PRESSED};
+    ButtonState_t buttonState   = ButtonState_t::WAIT_FOR_INPUT;
+    auto button                 = hwlib::target::pin_in(hwlib::target::pins::d3);
+    auto reloadButton           = hwlib::target::pin_in(hwlib::target::pins::d4);
     
     for(;;){
         

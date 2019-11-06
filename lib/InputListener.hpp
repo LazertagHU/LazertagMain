@@ -1,7 +1,8 @@
 #ifndef _INPUTLISTENER_HPP
 #define _INPUTLISTENER_HPP
 
-
+/// \brief
+/// enum class with all the button id's
 enum class buttonid
 {
     zeroButton, oneButton, twoButton, threeButton,
@@ -11,10 +12,7 @@ enum class buttonid
     hastagButton
 };
 
-class inputListener{
-private:
-
-    
+class inputListener{ 
 public:
     /// \brief
     /// Purely virtual and abstract class used for the listener patern.

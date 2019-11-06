@@ -4,9 +4,6 @@
 
 
 class keypadListener{
-private:
-
-    
 public:
     /// \brief
     /// Purely virtual and abstract class used for the listener patern.

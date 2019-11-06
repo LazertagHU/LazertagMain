@@ -10,13 +10,14 @@
 
 class inputControlTaak : public rtos::task<>, keypadListener{
 private:
+
     inputListener                                       *inPutListener;
     rtos::channel<char, 18>                             inputChannel;
     char                                                key  = '\0';
     keypadTaak                                          keyPadTaak;
     buttonTaak                                          butTonTaak;
 
-     /// \brief
+    /// \brief
     /// Main() for the Input Control task.
     /// \details
     /// this task waits on the channel for new presses, decodes them and sends them on to the listener
@@ -27,13 +28,18 @@ public:
     /// Default constructor for the InputControlTaak
     /// \details    
     /// Set task name, binds the listener, inits the channel and makes the button and keypad tasks
-    inputControlTaak(int prio, inputListener *inPutListener, const char * name):
-    task                (prio, name),
-    inPutListener       (inPutListener),
-    inputChannel        (this, "inputChannel"),
-    keyPadTaak          ("keypadTaak", this),
-    butTonTaak          ("buttonTaak", this)
+    inputControlTaak(
+        int prio, 
+        inputListener *inPutListener, 
+        const char * name
+    ):
+        task(prio, name),
+        inPutListener(inPutListener),
+        inputChannel(this, "inputChannel"),
+        keyPadTaak("keypadTaak", this),
+        butTonTaak ("buttonTaak", this)
     {}
+
     /// \brief
     /// Interface for writing pressed buttons
     /// \details    

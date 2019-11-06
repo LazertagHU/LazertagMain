@@ -55,7 +55,6 @@ public:
     /// \brief
     /// Returns the current healt
     int getHealth();
-    //int GethitAmount();
 };
 
 #endif
