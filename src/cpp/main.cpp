@@ -34,10 +34,10 @@ int main(){
     
     /* constructing tasks */
     auto display            = DisplayTaak(2, "DisplayTaak");
-    auto transfer           = TransferHitsControlTaak(9, "TransferHitsControlTaak",playerpool);
+    //auto transfer           = TransferHitsControlTaak(9, "TransferHitsControlTaak",playerpool);
     auto transmitter        = SendTask(8, "InputTask", led, lasersight, 1000 );
     auto Speaker            = SpeakerTaak(4, "SpeakerTaak");
-    auto runGame            = RunGameTaak(6, "RunGameTaak",display, transmitter, transfer, playerpool, Speaker);   
+    auto runGame            = RunGameTaak(6, "RunGameTaak",display, transmitter, playerpool, Speaker);   
     auto decoder            = msg_decoder(1, "decoder", runGame);
     auto pause_detection    = pause_detector(0, "pause_detector", ir_sensor, decoder);
 

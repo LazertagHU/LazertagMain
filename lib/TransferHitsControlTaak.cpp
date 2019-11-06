@@ -1,40 +1,40 @@
-#include "TransferHitsControlTaak.hpp"
-#include "hwlib.hpp"
-#include "PlayerInfo.hpp"
+// #include "TransferHitsControlTaak.hpp"
+// #include "hwlib.hpp"
+// #include "PlayerInfo.hpp"
 
 
-void TransferHitsControlTaak::writing(){
-    TransferEnableFlag.set();
-}
+// void TransferHitsControlTaak::writing(){
+//     TransferEnableFlag.set();
+// }
 
-void TransferHitsControlTaak::main(){
-    state = states::WAIT_FOR_TRIGGER;
-    for(;;){
-        switch( state ){
-            case states::WAIT_FOR_TRIGGER:
-                wait( TransferEnableFlag );
-            // break;
-                PlayerInfo player = playerpool.read();
-                int playerID = player.GetPlayerID();
+// void TransferHitsControlTaak::main(){
+//     state = states::WAIT_FOR_TRIGGER;
+//     for(;;){
+//         switch( state ){
+//             case states::WAIT_FOR_TRIGGER:
+//                 wait( TransferEnableFlag );
+//             // break;
+//                 PlayerInfo player = playerpool.read();
+//                 int playerID = player.GetPlayerID();
                 
-                hwlib::cout << "PlayerID: " << playerID << "\n";
-                if( hitAmount != 0 ){
-                    for( unsigned int i = hitAmount; i > 0; i-- ){
-                        hwlib::cout << "Enemy: " << hits[i-1].EnemyID << ", Damage: " << hits[i-1].Damage << ", Time: " << hits[i-1].Time << "\n";
-                    }
-                }else{
-                    hwlib::cout << "No hits registered\n";
-                }    
-                break;
-        }
-    }
+//                 hwlib::cout << "PlayerID: " << playerID << "\n";
+//                 if( hitAmount != 0 ){
+//                     for( unsigned int i = hitAmount; i > 0; i-- ){
+//                         hwlib::cout << "Enemy: " << hits[i-1].EnemyID << ", Damage: " << hits[i-1].Damage << ", Time: " << hits[i-1].Time << "\n";
+//                     }
+//                 }else{
+//                     hwlib::cout << "No hits registered\n";
+//                 }    
+//                 break;
+//         }
+//     }
 
-}
+// }
 
-void TransferHitsControlTaak::AddHit( int EnemyID, int Damage, int Time ){
-    hit newHit{ EnemyID, Damage, Time };
-    if( hitAmount < 100 ){
-        hits[hitAmount] = newHit;
-        hitAmount++;
-    }
-}
+// void TransferHitsControlTaak::AddHit( int EnemyID, int Damage, int Time ){
+//     hit newHit{ EnemyID, Damage, Time };
+//     if( hitAmount < 100 ){
+//         hits[hitAmount] = newHit;
+//         hitAmount++;
+//     }
+// }

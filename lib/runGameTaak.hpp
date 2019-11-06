@@ -11,9 +11,10 @@
 #include "SendTask.hpp"
 #include "pause_detector.hpp"
 #include "msg_decoder.hpp"
-#include "TransferHitsControlTaak.hpp"
+//#include "TransferHitsControlTaak.hpp"
 #include "InputControlTaak.hpp"
 #include "SpeakerTaak.hpp"
+#include "hit.hpp"
 
 class RunGameTaak : public rtos::task<>, public msg_listener, public InputListener
 {
@@ -33,7 +34,7 @@ private:
 
     DisplayTaak&                display;
     SendTask&                   transmitter;
-    TransferHitsControlTaak&    transfer;
+    //TransferHitsControlTaak&    transfer;
     SpeakerTaak&		        Speaker;
     InputControlTaak            inputControl;
     rtos::channel<buttonid, 10> inputChannel;
@@ -42,7 +43,9 @@ private:
     rtos::pool<PlayerInfo>&     playerpool;
     rtos::clock                 secondClock;
     rtos::timer                 delayTimer;
-    buttonid                    bnID; 
+    buttonid                    bnID;
+    hit                         hits[100];
+    unsigned int                hitAmount;
 
     /// \brief
     /// The main() of the RunGame task.
@@ -152,14 +155,14 @@ public:
         const char * name,
         DisplayTaak & display, 
         SendTask& transmitter,
-        TransferHitsControlTaak& transfer,
+        //TransferHitsControlTaak& transfer,
         rtos::pool<PlayerInfo> & playerpool,
         SpeakerTaak & Speaker
     ):
         task(prio, name ),
         display(display),
         transmitter(transmitter),
-        transfer(transfer),
+        //transfer(transfer),
 	    Speaker(Speaker),
         inputControl(7, this, "InputControlTaak"),
         inputChannel(this, "inputChannel"),
@@ -168,7 +171,9 @@ public:
         playerpool(playerpool),
         secondClock(this, 1'000'000, "secondClock"),
         delayTimer(this, "delayTimer")
-    {}
+    {
+        hitAmount = 0;
+    }
 
     /// \brief
     /// Interface for writing recieved messages
@@ -182,6 +187,9 @@ public:
     /// Public function to write commands to. This function internally uses a channel as waitable to save this incoming data.  
     void InputMessage(buttonid id)override;
 
+    void write_hits();
+
+    void AddHit( int EnemyID, int Damage, int Time );
 };
 
 

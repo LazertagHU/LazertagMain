@@ -202,7 +202,7 @@ void RunGameTaak::main()
                         auto damage = computeHit(msg);
                         // hwlib::cout << "damage: " << damage << "\n";
                         player.SetHealth((player.GetHealth() - damage));   // set lives
-                        transfer.AddHit(getEnemyID(msg) ,damage, remainingGameTime);
+                        AddHit(getEnemyID(msg) ,damage, remainingGameTime);
                         display.showMessage(player.GetHealth(), 'H');
                         playerpool.write(player);
                         delay = computeDeathDelay(msg);
@@ -349,16 +349,48 @@ void RunGameTaak::main()
             display.showMessage("Game over", 'M');
             bnID = inputChannel.read();
             if(bnID == buttonid::eButton){
-                transfer.writing();
+                write_hits();
             }
 
             break;
         }
 
+
         default:
             break;
         
         }   
+    }
+}
+
+/// \brief
+/// Funtion that writes hits
+/// \details
+/// Writes all the hits to the terminal with enemy id damage and time
+/// if no hits were registered writes no hits registered
+void RunGameTaak::write_hits(){
+    PlayerInfo player = playerpool.read();
+    int playerID = player.GetPlayerID();
+                
+    hwlib::cout << "PlayerID: " << playerID << "\n";
+    if( hitAmount != 0 ){
+        for( unsigned int i = hitAmount; i > 0; i-- ){
+            hwlib::cout << "Enemy: " << hits[i-1].EnemyID << ", Damage: " << hits[i-1].Damage << ", Time: " << hits[i-1].Time << "\n";
+        }
+    }else{
+        hwlib::cout << "No hits registered\n";
+    }    
+}
+
+/// \brief
+/// Function for adding hits.
+/// \details    
+/// Public function to add a hit to the memory.
+void RunGameTaak::AddHit( int EnemyID, int Damage, int Time ){
+    hit newHit{ EnemyID, Damage, Time };
+    if( hitAmount < 100 ){
+        hits[hitAmount] = newHit;
+        hitAmount++;
     }
 }
 
