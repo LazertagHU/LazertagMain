@@ -321,7 +321,7 @@ void RunGameTaak::main()
                 if (evt == delayTimer)
                 {
                     display.showMessage("Alive", 'M');
-                    inputChannel.clear();
+                    messageFlag.clear();
                     currentSubState = substates_runGame_t::ALIVE;
                 }
                 else
