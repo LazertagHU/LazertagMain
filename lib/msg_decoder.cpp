@@ -19,24 +19,24 @@ void msg_decoder::main(){
             {
                 if ((uint16_t)(msg>>16)^((uint16_t)msg))
                 {
-                    hwlib::cout << msg << "  " <<((uint16_t)(msg>>16)^((uint16_t)msg)) << "bad message 0\n";
+                    //hwlib::cout << msg << "  " <<((uint16_t)(msg>>16)^((uint16_t)msg)) << "bad message 0\n";
                     n = 0; msg = 0;
                     continue;
                 }
                 if (((msg%32) ^ ((msg>>5)%32)) != ((msg >> 10)%32))
                 {
-                    hwlib::cout << msg << "\n";
-                    hwlib::cout << ((msg >> 2)%32) << " " << ((msg >> 7)%32) << " " << ((msg >> 12)%32) << "bad message 1\n";
+                    //hwlib::cout << msg << "\n";
+                    //hwlib::cout << ((msg >> 2)%32) << " " << ((msg >> 7)%32) << " " << ((msg >> 12)%32) << "bad message 1\n";
                     n = 0; msg = 0;
                     continue;
                 }
                 if (!(msg >> 31))
                 {
-                    hwlib::cout << "bad message 2\n";
+                    //hwlib::cout << "bad message 2\n";
                     n = 0; msg = 0;
                     continue;
                 }
-                hwlib::cout << " huh";
+                //hwlib::cout << " huh";
                 listener.sendMessage(msg);
             }
             else

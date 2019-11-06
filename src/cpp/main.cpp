@@ -8,7 +8,7 @@ int main(){
     hwlib::wait_ms(500);
 
     /* constructing pins */
-    auto lasersight         = hwlib::target::pin_out( hwlib::target::pins::d1 );
+    auto lasersight         = hwlib::target::pin_out( hwlib::target::pins::d5 );
     auto led                = hwlib::target::d2_36kHz();
     auto reload             = hwlib::target::pin_in( hwlib::target::pins::d4);
 
@@ -33,10 +33,10 @@ int main(){
     auto playerpool         = rtos::pool<PlayerInfo>("playerpool");
     
     /* constructing tasks */
-    auto display            = DisplayTaak(2, "DisplayTaak");
+    auto display            = DisplayTaak(8, "DisplayTaak");
     auto transfer           = TransferHitsControlTaak(9, "TransferHitsControlTaak",playerpool);
-    auto transmitter        = SendTask(8, "InputTask", led, lasersight, 1000 );
-    auto Speaker            = SpeakerTaak(4, "SpeakerTaak");
+    auto transmitter        = SendTask(2, "InputTask", led, lasersight, 1000 );
+    auto Speaker            = SpeakerTaak(3, "SpeakerTaak");
     auto runGame            = RunGameTaak(6, "RunGameTaak",display, transmitter, transfer, playerpool, Speaker);   
     auto decoder            = msg_decoder(1, "decoder", runGame);
     auto pause_detection    = pause_detector(0, "pause_detector", ir_sensor, decoder);

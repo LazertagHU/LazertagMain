@@ -26,7 +26,7 @@ public:
     /// \details
     /// This constructor names its task, starts its clock and binds the listener.
     ButtonTaak(const char * name, KeypadListener *Keypadlistener):
-    task                (3, name),
+    task                (4, name),
     ButtonClock(this, 100'000, "ButtonClock"),
     Keypadlistener      (Keypadlistener)
     {}

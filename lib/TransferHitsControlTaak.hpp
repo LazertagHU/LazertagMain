@@ -25,7 +25,7 @@ public:
     /// The default constructor of TransferHitsControll
     /// \details
     /// Names its task and inits its flag and pool
-    TransferHitsControlTaak(int prio, const char * name, rtos::pool< PlayerInfo > & entity_pool ):
+    TransferHitsControlTaak(int prio, const char * name, rtos::pool< PlayerInfo > & playerpool ):
         task( prio, name ),
         TransferEnableFlag( this, "TransferEnableFlag" ),
 	    playerpool( playerpool ),
