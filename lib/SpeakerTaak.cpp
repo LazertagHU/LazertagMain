@@ -18,7 +18,7 @@ void SpeakerTaak::main(){
     int             half_period;
     unsigned int    end;
     unsigned int    TempFreq;
-    const std::array<noot, 2> Shooting{ noot{200, 60000}, noot{1500, 695000} };
+    const std::array<noot, 2> Shooting{ noot{200, 100000}, noot{1500, 665000} };
     const std::array<noot, 2> Hit{ noot{200, 100000}, noot{130, 600000} };
     
     for(;;){
@@ -52,9 +52,7 @@ void SpeakerTaak::main(){
                         lsp.write(0);
                         lsp.flush();
                         hwlib::wait_us(half_period);
-                        //hwlib::cout<<"hij komt in shoot1\n";
                         if(end < hwlib::now_us()){
-                            //hwlib::cout<< "komt in if shooting\n";
                             TempFreq                = Shooting[1].Frequentie;
                             half_period             = (1'000'000 / (3 * TempFreq));
                             SubShootingState = SubShootingState_t::SHOOT2;
@@ -65,7 +63,6 @@ void SpeakerTaak::main(){
                     }
                     
                     case SubShootingState_t::SHOOT2:{ 
-                        //hwlib::cout << "hoi\n";
                         lsp.write(1);
                         lsp.flush();
                         hwlib::wait_us(half_period);
