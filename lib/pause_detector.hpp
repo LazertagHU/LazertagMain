@@ -24,15 +24,15 @@ public:
     /// The default constructor of the pause_detector task.
     /// \details    
     /// Names its task, binds its pin_in, binds its listener and inits its 100us clock.
-    pause_detector(
+    pause_detector(int prio,
         const char * name,
         hwlib::pin_in & irsensor,
         pause_listener & listener
     ):
-        task( 0, name ),
+        task( prio, name ),
         irsensor( irsensor ),
         listener(listener),
-        interval_clock( this, 100, "interval_clock")
+        interval_clock( this, 150, "interval_clock")
     {}
 };
 

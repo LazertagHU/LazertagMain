@@ -1,64 +1,67 @@
 #include "InputControlTaak.hpp"
 
-void InputControlTaak::main(){
+void inputControlTaak::main(){
     enum class  InputState_t       {WAIT_FOR_INPUT};
-    InputState_t   InputState =   InputState_t::WAIT_FOR_INPUT;
+    InputState_t   inputState =   InputState_t::WAIT_FOR_INPUT;
     for(;;){
-        switch(InputState){
+        switch(inputState){
             
             case InputState_t::WAIT_FOR_INPUT:
-                Key = InputChannel.read();
-                switch(Key){
+                key = inputChannel.read();
+                switch(key){
                     case '0':
-                        Inputlistener->InputMessage(buttonid::zeroButton);
+                        inPutListener->inputMessage(buttonid::zeroButton);
                         break;
                     case '1':
-                        Inputlistener->InputMessage(buttonid::oneButton);
+                        inPutListener->inputMessage(buttonid::oneButton);
                         break;
                     case '2':
-                        Inputlistener->InputMessage(buttonid::twoButton);
+                        inPutListener->inputMessage(buttonid::twoButton);
                         break;
                     case '3':
-                        Inputlistener->InputMessage(buttonid::threeButton);
+                        inPutListener->inputMessage(buttonid::threeButton);
                         break;
                     case '4':
-                        Inputlistener->InputMessage(buttonid::fourButton);
+                        inPutListener->inputMessage(buttonid::fourButton);
                         break;
                     case '5':
-                        Inputlistener->InputMessage(buttonid::fiveButton);
+                        inPutListener->inputMessage(buttonid::fiveButton);
                         break;
                     case '6':
-                        Inputlistener->InputMessage(buttonid::sixButton);
+                        inPutListener->inputMessage(buttonid::sixButton);
                         break;
                     case '7':
-                        Inputlistener->InputMessage(buttonid::sevenButton);
+                        inPutListener->inputMessage(buttonid::sevenButton);
                         break;
                     case '8':
-                        Inputlistener->InputMessage(buttonid::eightButton);
+                        inPutListener->inputMessage(buttonid::eightButton);
                         break;
                     case '9':
-                        Inputlistener->InputMessage(buttonid::nineButton);
+                        inPutListener->inputMessage(buttonid::nineButton);
                         break;
                     case 'A':
-                        Inputlistener->InputMessage(buttonid::aButton);
+                        inPutListener->inputMessage(buttonid::aButton);
                         break;
                     case 'B':
-                        Inputlistener->InputMessage(buttonid::bButton);
+                        inPutListener->inputMessage(buttonid::bButton);
                         break;
                     case 'C':
-                        Inputlistener->InputMessage(buttonid::cButton);
+                        inPutListener->inputMessage(buttonid::cButton);
                         break;
                     case 'D':
-                        Inputlistener->InputMessage(buttonid::dButton);
+                        inPutListener->inputMessage(buttonid::dButton);
                         break;
                     case 'E':
-                        Inputlistener->InputMessage(buttonid::eButton);
+                        inPutListener->inputMessage(buttonid::eButton);
+                        break;
+                    case 'F':
+                        inPutListener->inputMessage(buttonid::fButton);
                         break;
                     case '*':
-                        Inputlistener->InputMessage(buttonid::starButton);
+                        inPutListener->inputMessage(buttonid::starButton);
                         break;
                     case '#':
-                        Inputlistener->InputMessage(buttonid::hastagButton);
+                        inPutListener->inputMessage(buttonid::hastagButton);
                         break;
                     default: 
                         break;

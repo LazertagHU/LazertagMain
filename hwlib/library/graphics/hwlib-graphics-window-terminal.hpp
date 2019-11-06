@@ -49,10 +49,9 @@ private:
       w.clear();
       cursor_set( xy( 0, 0 ) );
    }
+
+   
 public:
-   void flush() override {
-      w.flush();
-   }
 
    /// construct a terminal from a window and a font
    terminal_from( window & w, const font &f ):
@@ -61,6 +60,11 @@ public:
       f( f ), 
       cursor( xy( 0, 0 ) )
    { }
+
+   void flush() override {
+      w.flush();
+   }
+
 
 }; // class terminal_from
 

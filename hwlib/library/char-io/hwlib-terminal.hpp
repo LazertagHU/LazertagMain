@@ -64,10 +64,9 @@ protected:
    virtual void cursor_set_implementation( xy target ){}
 
 public:
-   /// The default implementation of flush does nothing.
+
+/// The default implementation of flush does nothing.
    virtual void flush(){}
-
-
 
    /// the size of the terminal in characters in x and y direction
    const xy size;

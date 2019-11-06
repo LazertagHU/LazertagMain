@@ -7,18 +7,18 @@ enum class buttonid
     zeroButton, oneButton, twoButton, threeButton,
     fourButton, fiveButton, sixButton, sevenButton,
     eightButton, nineButton, aButton, bButton,
-    cButton, dButton, eButton, starButton,
+    cButton, dButton, eButton, fButton, starButton,
     hastagButton
 };
 
-class InputListener{
+class inputListener{
 private:
 
     
 public:
     /// \brief
     /// Purely virtual and abstract class used for the listener patern.
-    virtual void InputMessage(buttonid id) = 0;
+    virtual void inputMessage(buttonid id) = 0;
 
 };
 

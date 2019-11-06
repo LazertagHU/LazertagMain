@@ -1,7 +1,7 @@
 #include "runGameTaak.hpp"
 
 
-void RunGameTaak::main()
+void runGameTaak::main()
 {
     state_t                 currentState        = state_t::IDLE;
     substates_runGame_t     currentSubState     = substates_runGame_t::ALIVE;
@@ -18,12 +18,12 @@ void RunGameTaak::main()
     //bool                    transferHitsAllowed = false;
     int                     countdown           = 0;
     int                     remainingGameTime   = 0;
-    int                     delay               = 0;
+    int                     bullets             = 0;
 
     if(gameLeader == true){
         display.showMessage(0,'N');
         auto player = playerpool.read();
-        player.SetPlayerID(0);
+        player.setPlayerID(0);
         playerpool.write(player);
         playerIDEntered = true;
     }
@@ -64,38 +64,42 @@ void RunGameTaak::main()
                 }
                 else if (isStartMessage(msg) && gameTimeEntered == true && playerIDEntered == true && playerWeaponEntered == true)
                 {
-                    display.showMessage("Starting game in", 'M');
+                    display.showMessage("Starting game\nin", 'M');
                     countdown       = 10 + computeCountdown(msg);
                     currentState    = state_t::AFTELLEN;
                 }
             }
             break;
         }
+        
         case state_t::WAIT_FOR_PLAYER_NUMBER:{
             int input = waitForInput('N');
             if(input > 0 && input <= 15)
             {
                 auto player = playerpool.read();
-                player.SetPlayerID(input);
+                player.setPlayerID(input);
                 playerpool.write(player);
                 playerIDEntered = true;
             }
             else
             {
-                display.showMessage("invalid player id", 'M');
+                display.showMessage("invalid player\nid", 'M');
                 display.showMessage(-1, 'N');
             }
             currentState = state_t::IDLE;
             break;
         }
+
         case state_t::WAIT_FOR_WEAPON_NUMBER:{
             int input = waitForInput('A');
             if(input > 0 && input <= 15){
                 auto player = playerpool.read();
-                player.SetWeapon(input);
+                player.setWeapon(input);
                 playerpool.write(player);
                 playerWeaponEntered = true;
-                display.showMessage(player.GetWeapon(input).name, 'G');
+                display.showMessage(player.getWeapon(input).name, 'G');
+                display.showMessage(player.getWeapon(input).bullets, 'A');
+                bullets = player.getWeapon(input).bullets;
             }
             else
             {
@@ -105,6 +109,7 @@ void RunGameTaak::main()
             currentState = state_t::IDLE;
             break;
         }
+
         case state_t::ENTER_TIME_REMAINING:{
             int input = waitForInput('T');
             if(input > 0 && input <= 15){
@@ -115,7 +120,7 @@ void RunGameTaak::main()
                 currentState = state_t::SEND_COMMAND_STATE;
                 display.showMessage("press # to send\ngame time", 'M');
             }else{
-                display.showMessage("Game Time too high", 'M');
+                display.showMessage("Game Time too\nhigh", 'M');
                 display.showMessage(0, 'T');
                 currentState = state_t::IDLE;
             }
@@ -125,15 +130,13 @@ void RunGameTaak::main()
         case state_t::SEND_COMMAND_STATE:{
             bnID = inputChannel.read();
             if(bnID == buttonid::hastagButton){
-                transmitter.SendMessage(setTimeCommand);
+                transmitter.sendMessage(setTimeCommand);
             }else if( bnID == buttonid::starButton){
                 countdown = 30;
+                startCommand = computeStartCommand(countdown, startCommand);
                 display.showMessage(countdown, 'T');
-                display.showMessage("press * to send start command", 'M');
-                computeStartCommand(countdown, startCommand);
+                display.showMessage("press * to send\nstart command", 'M');
                 currentState = state_t::START_GAME_TRANSMISSION_STATE;
-            }else{
-                    // donno of deze moet
             }
             break;
         }
@@ -143,7 +146,7 @@ void RunGameTaak::main()
                 if(evt == inputChannel){
                     bnID = inputChannel.read();
                     if(bnID == buttonid::starButton){
-                        transmitter.SendMessage(startCommand);
+                        transmitter.sendMessage(startCommand);
                     }
                 }else if(evt == secondClock){
                     if(countdown > 1){
@@ -169,9 +172,9 @@ void RunGameTaak::main()
                 display.showMessage(--countdown, 'T');
             }else{
                 auto player = playerpool.read();
-                player.SetHealth(100); // set lives
+                player.setHealth(100); // set lives
                 playerpool.write(player);
-                display.showMessage(playerpool.read().GetHealth(), 'H');
+                display.showMessage(playerpool.read().getHealth(), 'H');
                 display.showMessage("Alive", 'M');
                 computeShootCommand(shootCommand);
                 currentState = state_t::RUNGAME;
@@ -179,6 +182,7 @@ void RunGameTaak::main()
             }
             break;
         }
+
         case state_t::RUNGAME:{
             switch (currentSubState)
             {
@@ -189,57 +193,96 @@ void RunGameTaak::main()
                     msg = messagepool.read();
                     if(isHitMessage(msg))
                     {
-                        
-                        Speaker.HitSound();
+                        speaker.hitSound();
                         auto player = playerpool.read();
                         auto damage = computeHit(msg);
-                        // hwlib::cout << "damage: " << damage << "\n";
-                        player.SetHealth((player.GetHealth() - damage));   // set lives
-                        transfer.AddHit(getEnemyID(msg) ,damage, remainingGameTime);
-                        display.showMessage(player.GetHealth(), 'H');
+                        auto lives = player.getHealth() - damage;
+                        if(lives <= 0){player.setHealth(0); currentState = state_t::GAME_OVER;}
+                        else{player.setHealth(lives);}
+                        addHit(getEnemyID(msg) ,damage, remainingGameTime);
+                        display.showMessage(player.getHealth(), 'H');
                         playerpool.write(player);
-                        delay = computeDeathDelay(msg);
-                        delayTimer.set(delay);                                              /// check return type of computedelay
-                        display.showMessage("hit by", 'M');                           // nog dit uitvogelen
+                        delayTimer.set(computeDeathDelay(msg));                                              /// check return type of computedelay
+                        display.showMessage( "hit", 'M');                           // nog dit uitvogelen
                         currentSubState = substates_runGame_t::HIT;
-
-                        if(playerpool.read().GetHealth() <= 0)
-                        {
-                            currentState = state_t::GAME_OVER;
-                        }       
-                    }
-                    else
-                    {
-                    }
-                    
+                    }    
                 }
                 else if(evt == secondClock)
                 {
                     if( remainingGameTime > 0 )
                     {
+                        --remainingGameTime;
                         if( remainingGameTime%60 == 0 ){
                             display.showMessage(remainingGameTime/60, 'T');
                         }
-                        --remainingGameTime;
                     }
                     else
                     {
+                        display.showMessage(0, 'T');
                         currentState = state_t::GAME_OVER;
                     }
                 }
                 else
                 {
                     bnID = inputChannel.read();
-                    if(bnID == buttonid::eButton)
+                    if(bnID == buttonid::eButton && bullets > 0)
                     {
-                        Speaker.ShootSound();
-                        transmitter.SendMessage(shootCommand);
+                        speaker.shootSound();
+                        transmitter.sendMessage(shootCommand);
                         delayTimer.set(computeShootDelay()); ///<<----
+                        bullets--;
+                        display.showMessage(bullets, 'A');
                         currentSubState = substates_runGame_t::WEAPON_COOLDOWN;
-                    }else{
-                        // weet niet of dit moet
+                    }
+                    else if(bnID == buttonid::eButton){
+                        display.showMessage("Out of ammo!", 'M');
+                    }
+                    else if(bnID == buttonid::fButton)
+                    {
+                        display.showMessage("Reloading \nweapon...", 'M');
+                        delayTimer.set(playerpool.read().getWeapon(playerpool.read().getCurrentWeapon()).weaponReloadTime);
+                        currentSubState = substates_runGame_t::WEAPON_RELOAD;
                     }
                 }
+                break;
+            }
+            case substates_runGame_t::WEAPON_RELOAD:{
+                auto evt = wait(delayTimer + messageFlag + secondClock);
+                if(evt == delayTimer){
+                    bullets = playerpool.read().getWeapon(playerpool.read().getCurrentWeapon()).bullets;
+                    display.showMessage(bullets, 'A');
+                    display.showMessage("Alive!", 'M');
+                    currentSubState = substates_runGame_t::ALIVE;
+                }else if( evt == secondClock){
+                    if( remainingGameTime > 0 )
+                    {
+                        remainingGameTime--;
+                        if( remainingGameTime%60 == 0 ){
+                            display.showMessage(remainingGameTime/60, 'T');
+                        }
+                    }
+                    else
+                    {
+                        currentState = state_t::GAME_OVER;
+                    }
+                }
+                else{
+                    msg = messagepool.read();
+                    if(isHitMessage(msg)){
+                        auto player = playerpool.read();
+                        auto damage = computeHit(msg);
+                        auto lives = player.getHealth() - damage;
+                        if(lives <= 0){player.setHealth(0); currentState = state_t::GAME_OVER;}
+                        else{player.setHealth(lives);}
+                        addHit(getEnemyID(msg) ,damage, remainingGameTime);
+                        display.showMessage(player.getHealth(), 'H');
+                        playerpool.write(player);
+                        delayTimer.set(computeDeathDelay(msg));                                              /// check return type of computedelay
+                        display.showMessage("hit", 'M');                           // nog dit uitvogelen
+                        currentSubState = substates_runGame_t::HIT;
+                    }
+                }
+                
                 break;
             }
             case substates_runGame_t::WEAPON_COOLDOWN:{
@@ -250,30 +293,26 @@ void RunGameTaak::main()
                     if(isHitMessage(msg))
                     {
                         auto player = playerpool.read();
-                        player.SetHealth(player.GetHealth() - computeHit(msg));   // set lives
-                        display.showMessage(player.GetHealth(), 'H');
+                        auto damage = computeHit(msg);
+                        auto lives = player.getHealth() - damage;
+                        if(lives <= 0){player.setHealth(0); currentState = state_t::GAME_OVER;}
+                        else{player.setHealth(lives);}
+                        addHit(getEnemyID(msg) ,damage, remainingGameTime);
+                        display.showMessage(player.getHealth(), 'H');
                         playerpool.write(player);
-                        delay = computeDeathDelay(msg);
-                        delayTimer.set(delay);                                              /// check return type of computedelay
-                        display.showMessage("hit by", 'M');                           // nog dit uitvogelen
-                        currentSubState = substates_runGame_t::HIT;
-
-                        if(playerpool.read().GetHealth() <= 0)
-                        {
-                            currentState = state_t::GAME_OVER;
-                        }       
-                    }
-                    else
-                    {
-                    }
-                    
+                        delayTimer.set(computeDeathDelay(msg));                                              /// check return type of computedelay
+                        display.showMessage("hit", 'M');                           // nog dit uitvogelen
+                        currentSubState = substates_runGame_t::HIT;   
+                    }                    
                 }
                 else if(evt == secondClock)
                 {
                     if( remainingGameTime > 0 )
                     {
                         remainingGameTime--;
-                    //    display.showMessage(remainingGameTime, 'T');
+                        if( remainingGameTime%60 == 0 ){
+                            display.showMessage(remainingGameTime/60, 'T');
+                        }
                     }
                     else
                     {
@@ -282,6 +321,7 @@ void RunGameTaak::main()
                 }
                 else
                 {
+                    inputChannel.clear();
                     currentSubState = substates_runGame_t::ALIVE;
                 }
                 break;
@@ -291,6 +331,8 @@ void RunGameTaak::main()
                 if (evt == delayTimer)
                 {
                     display.showMessage("Alive", 'M');
+                    inputChannel.clear();
+                    messageFlag.clear();
                     currentSubState = substates_runGame_t::ALIVE;
                 }
                 else
@@ -298,7 +340,9 @@ void RunGameTaak::main()
                     if( remainingGameTime > 0 )
                     {
                         remainingGameTime--;
-                        //display.showMessage(remainingGameTime, 'T');
+                        if( remainingGameTime%60 == 0 ){
+                            display.showMessage(remainingGameTime/60, 'T');
+                        }
                     }
                     else
                     {
@@ -313,15 +357,22 @@ void RunGameTaak::main()
             }
             break;
         }
+
         case state_t::GAME_OVER:{
             display.showMessage("Game over", 'M');
+            // bnID = inputChannel.read();
+            // if(bnID == buttonid::eButton){
+            //     transfer.writing();
+            // }
             bnID = inputChannel.read();
             if(bnID == buttonid::eButton){
-                transfer.writing();
+                write_hits();
             }
 
             break;
         }
+
+
         default:
             break;
         
@@ -329,23 +380,54 @@ void RunGameTaak::main()
     }
 }
 
-uint32_t RunGameTaak::computeGameTime(uint32_t msg)
+/// \brief
+/// Funtion that writes hits
+/// \details
+/// Writes all the hits to the terminal with enemy id damage and time
+/// if no hits were registered writes no hits registered
+void runGameTaak::write_hits(){
+    playerInfo player = playerpool.read();
+    int playerID = player.getPlayerID();
+                
+    hwlib::cout << "PlayerID: " << playerID << "\n";
+    if( hitAmount != 0 ){
+        for( unsigned int i = hitAmount; i > 0; i-- ){
+            hwlib::cout << "Enemy: " << hits[i-1].enemyID << ", Damage: " << hits[i-1].damage << ", Time: " << hits[i-1].time << "\n";
+        }
+    }else{
+        hwlib::cout << "No hits registered\n";
+    }    
+}
+
+/// \brief
+/// Function for adding hits.
+/// \details    
+/// Public function to add a hit to the memory.
+void runGameTaak::addHit( int enemyID, int damage, int time ){
+    hit newHit{ enemyID, damage, time };
+    if( hitAmount < 100 ){
+        hits[hitAmount] = newHit;
+        hitAmount++;
+    }
+}
+
+uint32_t runGameTaak::computeGameTime(uint32_t msg)
 {
     msg <<= 23;
     msg >>= 28;
     return msg;
 };
 
-uint32_t RunGameTaak::computeCountdown(uint32_t msg)
+uint32_t runGameTaak::computeCountdown(uint32_t msg)
 {
     msg <<= 23;
     msg >>= 28;
     return msg*2;
 };
 
-void RunGameTaak::computeShootCommand(uint32_t & shootcommand){
-    auto id     = playerpool.read().GetPlayerID();
-    auto wepid  = playerpool.read().GetCurrentWeapon();
+void runGameTaak::computeShootCommand(uint32_t & shootcommand){
+    auto id     = playerpool.read().getPlayerID();
+    auto wepid  = playerpool.read().getCurrentWeapon();
     
     shootcommand |= (id << 26);
     shootcommand |= (id << 10);
@@ -355,7 +437,7 @@ void RunGameTaak::computeShootCommand(uint32_t & shootcommand){
     shootcommand = calculateCheckSum(shootcommand);
 }
 
-uint32_t RunGameTaak::computeStartCommand(uint32_t countdown, uint32_t command)
+uint32_t runGameTaak::computeStartCommand(uint32_t countdown, uint32_t command)
 {
         /* 
         This function calculates the startcommand that can be send to players. 
@@ -375,17 +457,16 @@ uint32_t RunGameTaak::computeStartCommand(uint32_t countdown, uint32_t command)
         return x;
 };
 
-int RunGameTaak::waitForInput(char place)
+int runGameTaak::waitForInput(char place)
 {
     int tens;
     int ones;
     int returnval = -1;
-    bool loop = true;
 
     enum class waitForInputStates{AWAIT_FIRST_CHARACTER, AWAIT_SECOND_CHARACTER, END};
     waitForInputStates state = waitForInputStates::AWAIT_FIRST_CHARACTER;
     
-    while (loop)
+    for(;;)
     {
         switch(state)
         {
@@ -409,12 +490,11 @@ int RunGameTaak::waitForInput(char place)
                 {
                     ones = static_cast<int>(bnID);
                     display.showMessage((tens*10) + ones , place);
-                    state = waitForInputStates::END;
                     returnval = (tens*10) + ones;
+                    state = waitForInputStates::END;
                 }
                 else if(bnID == buttonid::starButton)
                 {
-    
                     returnval = tens;
                     state = waitForInputStates::END;
                 }
@@ -428,10 +508,9 @@ int RunGameTaak::waitForInput(char place)
                 break;
         }
     }
-    return -1;
 };
 
-uint32_t RunGameTaak::calculateCheckSum(uint32_t input)
+uint32_t runGameTaak::calculateCheckSum(uint32_t input)
 {
     /*
     message layout:
@@ -460,13 +539,13 @@ uint32_t RunGameTaak::calculateCheckSum(uint32_t input)
     return input;
 };
 
-bool RunGameTaak::isHitMessage(uint32_t message)
+bool runGameTaak::isHitMessage(uint32_t message)
 {
     /* 
     This funciton calculates wether the player has been shot by an enemy.
     If the player shoots himself, the function will return false;
     */
-    auto id = playerpool.read().GetPlayerID();
+    auto id = playerpool.read().getPlayerID();
     message <<=17;
     message >>=27;
     // hwlib::cout << "Message: " << message << " compare: " << (message != id) << " ID: " << id << "\n";
@@ -476,7 +555,7 @@ bool RunGameTaak::isHitMessage(uint32_t message)
     return false;
 };
 
-int RunGameTaak::computeHit(uint32_t message)
+int runGameTaak::computeHit(uint32_t message)
 {
     /* 
     this function calculates the hit damage. 
@@ -486,12 +565,12 @@ int RunGameTaak::computeHit(uint32_t message)
     message <<=22;
     message >>= 27; // now contains weapon id;
 
-    hwlib::cout << playerpool.read().GetWeapon(message).damage << hwlib::endl;
+    hwlib::cout << playerpool.read().getWeapon(message).damage << hwlib::endl;
     
-    return playerpool.read().GetWeapon(message).damage;
+    return playerpool.read().getWeapon(message).damage;
 };
 
-int RunGameTaak::computeDeathDelay(uint32_t message)
+int runGameTaak::computeDeathDelay(uint32_t message)
 {
     /* 
     this function calculates the deathdelay. 
@@ -501,26 +580,26 @@ int RunGameTaak::computeDeathDelay(uint32_t message)
     message <<=22;
     message >>= 27; // now contains weapon id;
 
-    return playerpool.read().GetWeapon(message).deathDelay;
+    return playerpool.read().getWeapon(message).deathDelay;
 };
 
-int RunGameTaak::computeShootDelay()
+int runGameTaak::computeShootDelay()
 {
     /* 
     this function calculates the weaponcooldown. 
     it calculates the weapon id the player has shot with
     returns the specific delay that is attached to that weapon.
     */
-    auto wepNr = playerpool.read().GetCurrentWeapon();
+    auto wepNr = playerpool.read().getCurrentWeapon();
 
-    return playerpool.read().GetWeapon(wepNr).weaponCooldown;
+    return playerpool.read().getWeapon(wepNr).weaponCooldown;
 };
 
-bool RunGameTaak::isStartMessage(uint32_t message){
+bool runGameTaak::isStartMessage(uint32_t message){
     return ((message >> 9) & 1) && ((message >> 25) & 1);
 };
 
-bool RunGameTaak::isGameTimeMessage(uint32_t message){
+bool runGameTaak::isGameTimeMessage(uint32_t message){
     return (((message >> 9) & 1) == 0) && (((message >> 25) & 1) == 0 );
 };
 
@@ -528,17 +607,17 @@ bool RunGameTaak::isGameTimeMessage(uint32_t message){
 //     return ((message >> 9) & 1 == 0) && ((message >> 25) & 1 == 0);
 // };
 
-uint32_t RunGameTaak::getEnemyID(uint32_t message){
+uint32_t runGameTaak::getEnemyID(uint32_t message){
     message <<= 17;
     message >>= 27;
     return message;
 }
 
 
-void RunGameTaak::sendMessage(uint32_t m){
+void runGameTaak::sendMessage(uint32_t m){
     messagepool.write(m); messageFlag.set();
 }
 
-void RunGameTaak::InputMessage(buttonid id){
+void runGameTaak::inputMessage(buttonid id){
     inputChannel.write(id);
 }

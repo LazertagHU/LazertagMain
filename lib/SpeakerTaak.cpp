@@ -5,11 +5,11 @@ enum class SubShootingState_t           {SHOOT1, SHOOT2};
 enum class SubHitState_t                {HIT1, HIT2};
 
 struct noot{ 
-    int                Frequentie;
+    int                frequentie;
     int                duration;
 };
 
-void SpeakerTaak::main(){
+void speakerTaak::main(){
     SpeakerState_t SpeakerState         = SpeakerState_t::WAIT_FOR_INPUT;
     SubShootingState_t SubShootingState = SubShootingState_t::SHOOT1;
     SubHitState_t       SubHitState     = SubHitState_t::HIT1;
@@ -17,29 +17,35 @@ void SpeakerTaak::main(){
     auto            lsp                 = hwlib::target::pin_out( hwlib::target::pins::d7 );
     int             half_period;
     unsigned int    end;
+<<<<<<< HEAD
     unsigned int    TempFreq;
     const std::array<noot, 2> Shooting{ noot{200, 100000}, noot{1500, 695000} };
     const std::array<noot, 2> Hit{ noot{200, 100000}, noot{130, 600000} };
+=======
+    unsigned int    tempFreq;
+    const std::array<noot, 2> shooting{ noot{200, 60000}, noot{1500, 695000} };
+    const std::array<noot, 2> hit{ noot{200, 100000}, noot{130, 600000} };
+>>>>>>> 718c31de2c1fafdfc3c3f3cfe02d3a72f119e0eb
     
     for(;;){
         
         switch(SpeakerState){
             case SpeakerState_t::WAIT_FOR_INPUT:{
-                auto evt1           = wait(ShootFlag + HitFlag);
-                if(evt1 == ShootFlag){
+                auto evt1           = wait(shootFlag + hitFlag);
+                if(evt1 == shootFlag){
                     SpeakerState    = SpeakerState_t::SHOOTING;
                     SubShootingState = SubShootingState_t::SHOOT1;
-                    TempFreq                = Shooting[0].Frequentie;
-                    half_period             = (1'000'000 / (2 * TempFreq));
-                    end                     = hwlib::now_us() + Shooting[0].duration;
+                    tempFreq                = shooting[0].frequentie;
+                    half_period             = (1'000'000 / (2 * tempFreq));
+                    end                     = hwlib::now_us() + shooting[0].duration;
                     break;
                     }
-                else if(evt1 == HitFlag){
+                else if(evt1 == hitFlag){
                     SpeakerState    = SpeakerState_t::HIT;
                     SubHitState = SubHitState_t::HIT1;
-                    TempFreq                = Hit[0].Frequentie;
-                    half_period             = (1'000'000 / (2 * TempFreq));
-                    end                     = hwlib::now_us() + Hit[0].duration;
+                    tempFreq                = hit[0].frequentie;
+                    half_period             = (1'000'000 / (2 * tempFreq));
+                    end                     = hwlib::now_us() + hit[0].duration;
                     }
                 break;
             }
@@ -51,14 +57,14 @@ void SpeakerTaak::main(){
                         hwlib::wait_us(half_period);
                         lsp.write(0);
                         lsp.flush();
-                        hwlib::wait_us(half_period);
-                        //hwlib::cout<<"hij komt in shoot1\n";
+                        speakerTimer.set(half_period);
+                        wait(speakerTimer);
                         if(end < hwlib::now_us()){
                             //hwlib::cout<< "komt in if shooting\n";
-                            TempFreq                = Shooting[1].Frequentie;
-                            half_period             = (1'000'000 / (3 * TempFreq));
+                            tempFreq                = shooting[1].frequentie;
+                            half_period             = (1'000'000 / (3 * tempFreq));
                             SubShootingState = SubShootingState_t::SHOOT2;
-                            end                     = hwlib::now_us() + Shooting[1].duration;
+                            end                     = hwlib::now_us() + shooting[1].duration;
                             break;
                         }
                         break;
@@ -71,9 +77,10 @@ void SpeakerTaak::main(){
                         hwlib::wait_us(half_period);
                         lsp.write(0);
                         lsp.flush();
-                        hwlib::wait_us(half_period);
-                        TempFreq       -= 4;
-                        half_period     = (1'000'000 / (3 * TempFreq));
+                        speakerTimer.set(half_period);
+                        wait(speakerTimer);
+                        tempFreq       -= 4;
+                        half_period     = (1'000'000 / (3 * tempFreq));
                         if(end < hwlib::now_us()){
                             SpeakerState = SpeakerState_t::WAIT_FOR_INPUT;
                             break;
@@ -94,13 +101,14 @@ void SpeakerTaak::main(){
                         hwlib::wait_us(half_period);
                         lsp.write(0);
                         lsp.flush();
-                        hwlib::wait_us(half_period);
+                        speakerTimer.set(half_period);
+                        wait(speakerTimer);
                         
                         if(end < hwlib::now_us()){
-                            TempFreq                = Hit[1].Frequentie;
-                            half_period             = (1'000'000 / (2 * TempFreq));
+                            tempFreq                = hit[1].frequentie;
+                            half_period             = (1'000'000 / (2 * tempFreq));
                             SubHitState             = SubHitState_t::HIT2;
-                            end                     = hwlib::now_us() + Hit[1].duration;
+                            end                     = hwlib::now_us() + hit[1].duration;
                             break;
                         }
                         break;
@@ -111,7 +119,8 @@ void SpeakerTaak::main(){
                         hwlib::wait_us(half_period);
                         lsp.write(0);
                         lsp.flush();
-                        hwlib::wait_us(half_period);
+                        speakerTimer.set(half_period);
+                        wait(speakerTimer);
                         if(end < hwlib::now_us()){
                             SpeakerState = SpeakerState_t::WAIT_FOR_INPUT;
                             break;

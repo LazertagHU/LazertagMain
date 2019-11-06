@@ -4,12 +4,13 @@
 #include "rtos.hpp"
 #include "KeypadListener.hpp"
 
-class ButtonTaak : public rtos::task<>{
+class buttonTaak : public rtos::task<>{
 private:
 
-    rtos::clock                                         ButtonClock;
-    KeypadListener                                      *Keypadlistener;
+    rtos::clock                                         buttonClock;
+    keypadListener                                      *keypadlistener;
     bool                                                buttonPressed = false;
+    bool                                                reloadPressed = false;
 
     /// \brief
     /// Main() for the ButtonTask
@@ -24,10 +25,10 @@ public:
     /// Default constructor for ButtonTaak
     /// \details
     /// This constructor names its task, starts its clock and binds the listener.
-    ButtonTaak(const char * name, KeypadListener *Keypadlistener):
+    buttonTaak(const char * name, keypadListener *keypadlistener):
     task                (3, name),
-    ButtonClock(this, 100'000, "ButtonClock"),
-    Keypadlistener      (Keypadlistener)
+    buttonClock(this, 100'000, "buttonClock"),
+    keypadlistener      (keypadlistener)
     {}
     
     
