@@ -6,13 +6,13 @@
 #include "KeypadListener.hpp"
 
 
-class KeypadTaak : public rtos::task<>{
+class keypadTaak : public rtos::task<>{
 private:
 
-    rtos::clock                                         KeyClock;
-    int                                                 Temp = 0;
-    char                                                Key  = '\0';
-    KeypadListener                                      *Keypadlistener;
+    rtos::clock                                         keyClock;
+    int                                                 temp = 0;
+    char                                                key  = '\0';
+    keypadListener                                      *keyPadListener;
     
     /// \brief
     /// Main() for the Keypad task.
@@ -26,10 +26,10 @@ public:
     /// Default constructor for the KeypadTaak
     /// \details
     /// Names the task, starts a 100ms clock and binds the listener
-    KeypadTaak(const char * name, KeypadListener *Keypadlistener):
+    keypadTaak(const char * name, keypadListener *keyPadListener):
     task(5, name),
-    KeyClock(this, 100'000, "KeyClock"),
-    Keypadlistener(Keypadlistener)
+    keyClock(this, 100'000, "keyClock"),
+    keyPadListener(keyPadListener)
     {}
 };
 

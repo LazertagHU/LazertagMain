@@ -11,11 +11,12 @@
 #include "SendTask.hpp"
 #include "pause_detector.hpp"
 #include "msg_decoder.hpp"
-#include "TransferHitsControlTaak.hpp"
+//#include "TransferHitsControlTaak.hpp"
 #include "InputControlTaak.hpp"
 #include "SpeakerTaak.hpp"
+#include "hit.hpp"
 
-class RunGameTaak : public rtos::task<>, public msg_listener, public InputListener
+class runGameTaak : public rtos::task<>, public msg_listener, public inputListener
 {
 private:
 
@@ -31,18 +32,20 @@ private:
         ALIVE, WEAPON_COOLDOWN, HIT, WEAPON_RELOAD
     };
 
-    DisplayTaak&                display;
-    SendTask&                   transmitter;
-    TransferHitsControlTaak&    transfer;
-    SpeakerTaak&		        Speaker;
-    InputControlTaak            inputControl;
+    displayTaak&                display;
+    sendTask&                   transmitter;
+    //TransferHitsControlTaak&    transfer;
+    speakerTaak&		        speaker;
+    inputControlTaak            inputControl;
     rtos::channel<buttonid, 10> inputChannel;
     rtos::flag                  messageFlag;
     rtos::pool<uint32_t>        messagepool;
-    rtos::pool<PlayerInfo>&     playerpool;
+    rtos::pool<playerInfo>&     playerpool;
     rtos::clock                 secondClock;
     rtos::timer                 delayTimer;
-    buttonid                    bnID; 
+    buttonid                    bnID;
+    hit                         hits[100];
+    unsigned int                hitAmount;
 
     /// \brief
     /// The main() of the RunGame task.
@@ -148,19 +151,19 @@ public:
     /// The default constructor of RunGameTaak
     /// \details
     /// Names its task, binds all given paramaters, inits own objects and starts its 1s clock.
-    RunGameTaak(int prio,
+    runGameTaak(int prio,
         const char * name,
-        DisplayTaak & display, 
-        SendTask& transmitter,
-        TransferHitsControlTaak& transfer,
-        rtos::pool<PlayerInfo> & playerpool,
-        SpeakerTaak & Speaker
+        displayTaak & display, 
+        sendTask& transmitter,
+        //TransferHitsControlTaak& transfer,
+        rtos::pool<playerInfo> & playerpool,
+        speakerTaak & speaker
     ):
         task(prio, name ),
         display(display),
         transmitter(transmitter),
-        transfer(transfer),
-	    Speaker(Speaker),
+        //transfer(transfer),
+	    speaker(speaker),
         inputControl(7, this, "InputControlTaak"),
         inputChannel(this, "inputChannel"),
         messageFlag(this, "messageFlag"),
@@ -168,7 +171,9 @@ public:
         playerpool(playerpool),
         secondClock(this, 1'000'000, "secondClock"),
         delayTimer(this, "delayTimer")
-    {}
+    {
+        hitAmount = 0;
+    }
 
     /// \brief
     /// Interface for writing recieved messages
@@ -180,8 +185,11 @@ public:
     /// Interface for writing recieved commands
     /// \details    
     /// Public function to write commands to. This function internally uses a channel as waitable to save this incoming data.  
-    void InputMessage(buttonid id)override;
+    void inputMessage(buttonid id)override;
 
+    void write_hits();
+
+    void addHit( int enemyID, int damage, int time );
 };
 
 
