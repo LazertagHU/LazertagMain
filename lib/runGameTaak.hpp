@@ -1,6 +1,8 @@
 #ifndef RUN_GAME_TAAK_HPP
 #define RUN_GAME_TAAK_HPP
 
+#include "SpeakerTaak.hpp"
+
 #include "DisplayTaak.hpp"
 #include "hwlib.hpp"
 #include "../../hwlib/library/hwlib.hpp"
@@ -13,7 +15,6 @@
 #include "msg_decoder.hpp"
 #include "TransferHitsControlTaak.hpp"
 #include "InputControlTaak.hpp"
-#include "SpeakerTaak.hpp"
 
 class RunGameTaak : public rtos::task<>, public msg_listener, public InputListener
 {
