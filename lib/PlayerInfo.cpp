@@ -1,24 +1,24 @@
 #include "PlayerInfo.hpp"
 
 
-weapon PlayerInfo::GetWeapon(int n){ 
+weapon playerInfo::getWeapon(int n){ 
     return weapons[n-1]; 
 }
 
-unsigned int PlayerInfo::GetCurrentWeapon(){ 
+unsigned int playerInfo::getCurrentWeapon(){ 
     return currentWeapon;
 }
 
-void PlayerInfo::SetWeapon( int weaponID ){ 
+void playerInfo::setWeapon( int weaponID ){ 
     currentWeapon = weaponID; 
 }
     
-unsigned int PlayerInfo::GetPlayerID(){ 
-    return PlayerID; 
+unsigned int playerInfo::getPlayerID(){ 
+    return playerID; 
 }
 
-void PlayerInfo::SetPlayerID( unsigned int NewPlayerID ){ 
-    PlayerID = NewPlayerID; 
+void playerInfo::setPlayerID( unsigned int newPlayerID ){ 
+    playerID = newPlayerID; 
 }
 
 //hit* PlayerInfo::GetHits(){ 
@@ -31,11 +31,11 @@ void PlayerInfo::SetPlayerID( unsigned int NewPlayerID ){
 //    hitAmount++;
 //}
 
-void PlayerInfo::SetHealth( int NewHealth ){ 
-    health = NewHealth; 
+void playerInfo::setHealth( int newHealth ){ 
+    health = newHealth; 
 }
 
-int PlayerInfo::GetHealth(){ 
+int playerInfo::getHealth(){ 
     return health; 
 }
 

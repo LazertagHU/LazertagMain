@@ -4,49 +4,49 @@
 #include <array>
 
 
-void DisplayTaak::main(){
+void displayTaak::main(){
     auto scl                = hwlib::target::pin_oc( hwlib::target::pins::scl);
     auto sda                = hwlib::target::pin_oc( hwlib::target::pins::sda);
     auto i2c_bus            = hwlib::i2c_bus_bit_banged_scl_sda( scl, sda);
     auto oled               = hwlib::glcd_oled(i2c_bus, 0x3c);
     
-    auto Wmessage           = hwlib::part(oled, hwlib::xy(3, 20), hwlib::xy(123,25));
-    auto Wname              = hwlib::part(oled, hwlib::xy(3, 5), hwlib::xy(32,10));
-    auto WweaponT           = hwlib::part(oled, hwlib::xy(38, 5), hwlib::xy(61,9));
-    auto Wammo              = hwlib::part(oled, hwlib::xy(100, 5), hwlib::xy(26,9));
-    auto Whealth            = hwlib::part(oled, hwlib::xy(3, 53), hwlib::xy(60, 10));
-    auto Wtime              = hwlib::part(oled, hwlib::xy(67, 53), hwlib::xy(60,10));
-    auto Wrectangle         = hwlib::part(oled, hwlib::xy(0, 0), hwlib::xy(128,64));
+    auto wMessage           = hwlib::part(oled, hwlib::xy(3, 20), hwlib::xy(123,25));
+    auto wName              = hwlib::part(oled, hwlib::xy(3, 5), hwlib::xy(32,10));
+    auto wWeaponT           = hwlib::part(oled, hwlib::xy(38, 5), hwlib::xy(61,9));
+    auto wAmmo              = hwlib::part(oled, hwlib::xy(100, 5), hwlib::xy(26,9));
+    auto wHealth            = hwlib::part(oled, hwlib::xy(3, 53), hwlib::xy(60, 10));
+    auto wTime              = hwlib::part(oled, hwlib::xy(67, 53), hwlib::xy(60,10));
+    auto wRectangle         = hwlib::part(oled, hwlib::xy(0, 0), hwlib::xy(128,64));
     
  
-    auto Fmessage           = hwlib::font_default_8x8();
-    auto Fname              = hwlib::font_default_8x8();
-    auto Fammo              = hwlib::font_default_8x8();
-    auto Fhealth            = hwlib::font_default_8x8();
-    auto Ftime              = hwlib::font_default_8x8();
+    auto fMessage           = hwlib::font_default_8x8();
+    auto fName              = hwlib::font_default_8x8();
+    auto fAmmo              = hwlib::font_default_8x8();
+    auto fHealth            = hwlib::font_default_8x8();
+    auto fTime              = hwlib::font_default_8x8();
     
-    auto MessageDisplay     = hwlib::terminal_from(Wmessage, Fmessage);
-    auto NameDisplay        = hwlib::terminal_from(Wname, Fname);
-    auto AmmoDisplay        = hwlib::terminal_from(Wammo, Fammo);
-    auto HealthDisplay      = hwlib::terminal_from(Whealth, Fhealth);
-    auto TimeDisplay        = hwlib::terminal_from(Wtime, Ftime);
-    auto WeaponTDisplay     = hwlib::terminal_from(WweaponT, Fammo);
+    auto messageDisplay     = hwlib::terminal_from(wMessage, fMessage);
+    auto nameDisplay        = hwlib::terminal_from(wName, fName);
+    auto ammoDisplay        = hwlib::terminal_from(wAmmo, fAmmo);
+    auto healthDisplay      = hwlib::terminal_from(wHealth, fHealth);
+    auto timeDisplay        = hwlib::terminal_from(wTime, fTime);
+    auto weaponTDisplay     = hwlib::terminal_from(wWeaponT, fAmmo);
     
                                                                                     //////////////////////////////////////////////////////////////
-    hwlib::rectangle MessageRectangle(hwlib::xy(0, 15), hwlib::xy(127,49));                                   //Maak alle rectangles aan
-    hwlib::rectangle NameRectangle(hwlib::xy(0, 0), hwlib::xy(35, 15));                                      //
-    hwlib::rectangle AmmoRectangle(hwlib::xy(35, 0), hwlib::xy(127, 15));                                     //
-    hwlib::rectangle HealthRectangle(hwlib::xy(0, 49), hwlib::xy(64,63));                                    //
-    hwlib::rectangle TimeRectangle(hwlib::xy(64, 49), hwlib::xy(127,63));                                      //
+    hwlib::rectangle messageRectangle(hwlib::xy(0, 15), hwlib::xy(127,49));                                   //Maak alle rectangles aan
+    hwlib::rectangle nameRectangle(hwlib::xy(0, 0), hwlib::xy(35, 15));                                      //
+    hwlib::rectangle ammoRectangle(hwlib::xy(35, 0), hwlib::xy(127, 15));                                     //
+    hwlib::rectangle healthRectangle(hwlib::xy(0, 49), hwlib::xy(64,63));                                    //
+    hwlib::rectangle timeRectangle(hwlib::xy(64, 49), hwlib::xy(127,63));                                      //
 
     
     oled.clear(); 
     //oled.flush();
-    MessageRectangle.draw(Wrectangle);  
-    NameRectangle.draw(Wrectangle);  
-    AmmoRectangle.draw(Wrectangle);   
-    HealthRectangle.draw(Wrectangle);  
-    TimeRectangle.draw(Wrectangle); 
+    messageRectangle.draw(wRectangle);  
+    nameRectangle.draw(wRectangle);  
+    ammoRectangle.draw(wRectangle);   
+    healthRectangle.draw(wRectangle);  
+    timeRectangle.draw(wRectangle); 
     oled.flush();
     enum class display_state_t        {IDLE};
     display_state_t         state   = display_state_t::IDLE;
@@ -55,52 +55,52 @@ void DisplayTaak::main(){
     for(;;){
         switch(state){
             case display_state_t::IDLE:{
-                auto Message = inputChannel.read();
+                auto message = inputChannel.read();
             // break;
-                if(Message.Type == 'M'){
+                if(message.type == 'M'){
                    
-                    hwlib::wait_us(10); Wmessage.clear();
-                    hwlib::wait_us(10); MessageDisplay  << "\t0000"; 
-                    hwlib::wait_us(10);MessageDisplay <<  Message.StringToWrite;
+                    hwlib::wait_us(10); wMessage.clear();
+                    hwlib::wait_us(10); messageDisplay  << "\t0000"; 
+                    hwlib::wait_us(10);messageDisplay <<  message.stringToWrite;
                     hwlib::wait_us(10); //MessageDisplay; 
-                    MessageDisplay.flush();
+                    messageDisplay.flush();
                 }
-                else if(Message.Type == 'N'){
-                    hwlib::wait_us(10); Wname.clear();
-                    hwlib::wait_us(10); NameDisplay << "\t0000";
-                    hwlib::wait_us(10); NameDisplay << "#";
-                    hwlib::wait_us(10); NameDisplay << Message.IntToWrite;
-                    hwlib::wait_us(10); NameDisplay << hwlib::flush;
-                    NameDisplay.flush();
+                else if(message.type == 'N'){
+                    hwlib::wait_us(10); wName.clear();
+                    hwlib::wait_us(10); nameDisplay << "\t0000";
+                    hwlib::wait_us(10); nameDisplay << "#";
+                    hwlib::wait_us(10); nameDisplay << message.intToWrite;
+                    hwlib::wait_us(10); nameDisplay << hwlib::flush;
+                    nameDisplay.flush();
                 }
-                else if(Message.Type == 'A'){
-                    hwlib::wait_us(10); Wammo.clear();
-                    hwlib::wait_us(10); AmmoDisplay << "\t0000";
-                    hwlib::wait_us(10); AmmoDisplay << Message.IntToWrite;
+                else if(message.type == 'A'){
+                    hwlib::wait_us(10); wAmmo.clear();
+                    hwlib::wait_us(10); ammoDisplay << "\t0000";
+                    hwlib::wait_us(10); ammoDisplay << message.intToWrite;
                     hwlib::wait_us(10);// AmmoDisplay;// << hwlib::flush;
-                    AmmoDisplay.flush();
+                    ammoDisplay.flush();
                 }
-                else if(Message.Type == 'H'){
-                    hwlib::wait_us(10); Whealth.clear();
-                    hwlib::wait_us(10); HealthDisplay   << "\t0000";
-                    hwlib::wait_us(10); HealthDisplay << "HP: ";
-                    hwlib::wait_us(10); HealthDisplay << Message.IntToWrite;
+                else if(message.type == 'H'){
+                    hwlib::wait_us(10); wHealth.clear();
+                    hwlib::wait_us(10); healthDisplay   << "\t0000";
+                    hwlib::wait_us(10); healthDisplay << "HP: ";
+                    hwlib::wait_us(10); healthDisplay << message.intToWrite;
                     hwlib::wait_us(10);// HealthDisplay;// << hwlib::flush;
-                    HealthDisplay.flush();
+                    healthDisplay.flush();
                 }
-                else if(Message.Type == 'T'){
-                    hwlib::wait_us(10); Wtime.clear();
-                    hwlib::wait_us(10); TimeDisplay     << "\t0000";
-                    hwlib::wait_us(10); TimeDisplay << Message.IntToWrite;
+                else if(message.type == 'T'){
+                    hwlib::wait_us(10); wTime.clear();
+                    hwlib::wait_us(10); timeDisplay     << "\t0000";
+                    hwlib::wait_us(10); timeDisplay << message.intToWrite;
                     hwlib::wait_us(10); //TimeDisplay;// <<  hwlib::flush;
-                    TimeDisplay.flush();
+                    timeDisplay.flush();
                 }
-                else if(Message.Type == 'G'){
-                    hwlib::wait_us(10); WweaponT.clear();
-                    hwlib::wait_us(10); WeaponTDisplay << "\t0000"; 
-                    hwlib::wait_us(10); WeaponTDisplay << Message.StringToWrite; 
+                else if(message.type == 'G'){
+                    hwlib::wait_us(10); wWeaponT.clear();
+                    hwlib::wait_us(10); weaponTDisplay << "\t0000"; 
+                    hwlib::wait_us(10); weaponTDisplay << message.stringToWrite; 
                     hwlib::wait_us(10);// WeaponTDisplay;// << hwlib::flush;
-                    WeaponTDisplay.flush();
+                    weaponTDisplay.flush();
                 }
                 break;
             }   
@@ -111,17 +111,17 @@ void DisplayTaak::main(){
 };
 
 
-void DisplayTaak::showMessage(const char* Message, char oledRec){  
+void displayTaak::showMessage(const char* message, char oledRec){  
                             //- Public functie voor het verwerken van een dataType String
-    TypeMessage sendMessage;                                                  //- creeer een TypeMessage struct object voor de Channel
-    sendMessage.StringToWrite   = Message;                                      //- Vul de struct met de Message en het dataType
-    sendMessage.Type            = oledRec;                                      //
+    typeMessage sendMessage;                                                  //- creeer een TypeMessage struct object voor de Channel
+    sendMessage.stringToWrite   = message;                                      //- Vul de struct met de Message en het dataType
+    sendMessage.type            = oledRec;                                      //
     inputChannel.write(sendMessage); 
 }          
 
-void DisplayTaak::showMessage(int Message, char oledRec){                                    //- Public functie voor het verwerken van een dataType Int
-    TypeMessage sendMessage;                                                    //- Creeer een TypeMessage struct object voor de Channel
-    sendMessage.IntToWrite   = Message;                                         //- Vul de struct met de Message en het dataType    
-    sendMessage.Type            = oledRec;                                      //    
+void displayTaak::showMessage(int message, char oledRec){                                    //- Public functie voor het verwerken van een dataType Int
+    typeMessage sendMessage;                                                    //- Creeer een TypeMessage struct object voor de Channel
+    sendMessage.intToWrite      = message;                                         //- Vul de struct met de Message en het dataType    
+    sendMessage.type            = oledRec;                                      //    
     inputChannel.write(sendMessage);                                            //- Write de struct in de channel. Nu kan de task het verwerken                         
 }           

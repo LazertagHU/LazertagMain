@@ -3,14 +3,14 @@
 
 
 
-class KeypadListener{
+class keypadListener{
 private:
 
     
 public:
     /// \brief
     /// Purely virtual and abstract class used for the listener patern.
-    virtual void KeyPressed(char Key) = 0;
+    virtual void keyPressed(char key) = 0;
 
 };
 

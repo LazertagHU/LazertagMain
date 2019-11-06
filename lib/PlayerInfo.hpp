@@ -5,9 +5,9 @@
 #include "hwlib.hpp"
 //#include "hit.hpp"
 
-class PlayerInfo {
+class playerInfo {
 private:
-    unsigned int PlayerID;
+    unsigned int playerID;
     std::array<weapon, 10> weapons{weapon{"pistol", 5, 4'000'000, 500'000, 3'000'000, 20}, weapon{"sniper", 15, 10'000'000, 3'000'000, 5'000'000, 10}};
     unsigned int currentWeapon;
     //hit hits[10]; // 100 breekt alles, 50 breek het op een andere manier. 10 werkt volledig
@@ -19,42 +19,42 @@ public:
     /// The default constructor for the PlayerInfo entity.
     /// \details
     /// Sets starting amounts of health and hitAmount. During the game this entity saves all player info
-    PlayerInfo(){
+    playerInfo(){
         health = 100;
         hitAmount = 0;
     }
     
     /// \brief
     /// Returns the n weapon 
-    weapon GetWeapon(int n);
+    weapon getWeapon(int n);
     
 
     /// \brief
     /// Returns the current weapon
-    unsigned int GetCurrentWeapon();
+    unsigned int getCurrentWeapon();
 
     /// \brief
     /// Sets the current weapon to n
-    void SetWeapon(int n);
+    void setWeapon(int n);
 
     /// \brief
     /// Returns the current PlayerID.
-    unsigned int GetPlayerID();
+    unsigned int getPlayerID();
 
     /// \brief
     /// Sets the player ID to NewPlayerID
-    void SetPlayerID( unsigned int NewPlayerID );
+    void setPlayerID( unsigned int newPlayerID );
 
     //hit* GetHits();
     //void AddHit( int EnemyID, int Damage, int Time );
 
     /// \brief
     /// Set the current health to NewHealt
-    void SetHealth( int NewHealth );
+    void setHealth( int newHealth );
 
     /// \brief
     /// Returns the current healt
-    int GetHealth();
+    int getHealth();
     //int GethitAmount();
 };
 

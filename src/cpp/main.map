@@ -226,15 +226,15 @@ Discarded input sections
                 0x0000000000000000        0x4 runGameTaak.o
  .text._ZN5hwlib9uart_getcEv
                 0x0000000000000000        0x4 runGameTaak.o
- .text._ZN11RunGameTaak15computeGameTimeEm
+ .text._ZN11runGameTaak15computeGameTimeEm
                 0x0000000000000000        0x6 runGameTaak.o
- .text._ZN11RunGameTaak16computeCountdownEm
+ .text._ZN11runGameTaak16computeCountdownEm
                 0x0000000000000000        0x8 runGameTaak.o
- .text._ZN11RunGameTaak14isStartMessageEm
+ .text._ZN11runGameTaak14isStartMessageEm
                 0x0000000000000000        0xe runGameTaak.o
- .text._ZN11RunGameTaak17isGameTimeMessageEm
+ .text._ZN11runGameTaak17isGameTimeMessageEm
                 0x0000000000000000        0xc runGameTaak.o
- .text._ZN11RunGameTaak10getEnemyIDEm
+ .text._ZN11runGameTaak10getEnemyIDEm
                 0x0000000000000000        0x6 runGameTaak.o
  .bss._ZZN3due9now_ticksEvE4high
                 0x0000000000000000        0x8 runGameTaak.o
@@ -1832,7 +1832,7 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
                 [!provide]                        PROVIDE (__ram_size = __ram_size)
                 [!provide]                        PROVIDE (__ram_end = __ram_end)
 
-.text           0x0000000000000000     0x5ed4
+.text           0x0000000000000000     0x5ec0
                 0x0000000000000000                . = ALIGN (0x4)
                 0x0000000000000000                __text_start = .
                 [!provide]                        PROVIDE (__text_start = __text_start)
@@ -1862,9 +1862,9 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
                 0x0000000000000124       0x34 ButtonTaak.o
                 0x0000000000000124                due::pin_in::pin_in(due::pins)
                 0x0000000000000124                due::pin_in::pin_in(due::pins)
- .text.startup._ZN10ButtonTaak4mainEv
+ .text.startup._ZN10buttonTaak4mainEv
                 0x0000000000000158       0x98 ButtonTaak.o
-                0x0000000000000158                ButtonTaak::main()
+                0x0000000000000158                buttonTaak::main()
  .text._ZN3due12ticks_per_usEv
                 0x00000000000001f0        0x6 ButtonTaak.o
                 0x00000000000001f0                due::ticks_per_us()
@@ -1875,19 +1875,19 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
  .text._ZN5hwlib9uart_putcEc
                 0x0000000000000278        0x4 ButtonTaak.o
                 0x0000000000000278                hwlib::uart_putc(char)
- .text._ZN16InputControlTaak10KeyPressedEc
+ .text._ZN16inputControlTaak10keyPressedEc
                 0x000000000000027c       0x4a InputControlTaak.o
-                0x000000000000027c                InputControlTaak::KeyPressed(char)
-                0x00000000000002bc                non-virtual thunk to InputControlTaak::KeyPressed(char)
+                0x000000000000027c                inputControlTaak::keyPressed(char)
+                0x00000000000002bc                non-virtual thunk to inputControlTaak::keyPressed(char)
  .text._ZN5hwlib7ostream6fillerEi
                 0x00000000000002c6       0x1a InputControlTaak.o
                 0x00000000000002c6                hwlib::ostream::filler(int)
  .text._ZN5hwliblsERNS_7ostreamEPKc
                 0x00000000000002e0       0x54 InputControlTaak.o
                 0x00000000000002e0                hwlib::operator<<(hwlib::ostream&, char const*)
- .text.startup._ZN16InputControlTaak4mainEv
+ .text.startup._ZN16inputControlTaak4mainEv
                 0x0000000000000334      0x214 InputControlTaak.o
-                0x0000000000000334                InputControlTaak::main()
+                0x0000000000000334                inputControlTaak::main()
  .text._ZN5hwlib21port_direct_from_in_t14number_of_pinsEv
                 0x0000000000000548        0x8 KeypadTaak.o
                 0x0000000000000548                hwlib::port_direct_from_in_t::number_of_pins()
@@ -1937,94 +1937,94 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
  .text._ZN5hwlib6keypadILi16EE7pressedEv
                 0x000000000000063c       0x70 KeypadTaak.o
                 0x000000000000063c                hwlib::keypad<16>::pressed()
- .text.startup._ZN10KeypadTaak4mainEv
+ .text.startup._ZN10keypadTaak4mainEv
                 0x00000000000006ac      0x138 KeypadTaak.o
-                0x00000000000006ac                KeypadTaak::main()
+                0x00000000000006ac                keypadTaak::main()
  .text._ZN5hwlib6keypadILi16EE14char_availableEv
                 0x00000000000007e4       0x4a KeypadTaak.o
                 0x00000000000007e4                hwlib::keypad<16>::char_available()
- .text._ZN10PlayerInfo9GetWeaponEi
+ .text._ZN10playerInfo9getWeaponEi
                 0x000000000000082e       0x20 PlayerInfo.o
-                0x000000000000082e                PlayerInfo::GetWeapon(int)
- .text._ZN10PlayerInfo16GetCurrentWeaponEv
+                0x000000000000082e                playerInfo::getWeapon(int)
+ .text._ZN10playerInfo16getCurrentWeaponEv
                 0x000000000000084e        0x6 PlayerInfo.o
-                0x000000000000084e                PlayerInfo::GetCurrentWeapon()
- .text._ZN10PlayerInfo9SetWeaponEi
+                0x000000000000084e                playerInfo::getCurrentWeapon()
+ .text._ZN10playerInfo9setWeaponEi
                 0x0000000000000854        0x6 PlayerInfo.o
-                0x0000000000000854                PlayerInfo::SetWeapon(int)
- .text._ZN10PlayerInfo11GetPlayerIDEv
+                0x0000000000000854                playerInfo::setWeapon(int)
+ .text._ZN10playerInfo11getPlayerIDEv
                 0x000000000000085a        0x4 PlayerInfo.o
-                0x000000000000085a                PlayerInfo::GetPlayerID()
- .text._ZN10PlayerInfo11SetPlayerIDEj
+                0x000000000000085a                playerInfo::getPlayerID()
+ .text._ZN10playerInfo11setPlayerIDEj
                 0x000000000000085e        0x4 PlayerInfo.o
-                0x000000000000085e                PlayerInfo::SetPlayerID(unsigned int)
- .text._ZN10PlayerInfo9SetHealthEi
+                0x000000000000085e                playerInfo::setPlayerID(unsigned int)
+ .text._ZN10playerInfo9setHealthEi
                 0x0000000000000862        0x6 PlayerInfo.o
-                0x0000000000000862                PlayerInfo::SetHealth(int)
- .text._ZN10PlayerInfo9GetHealthEv
+                0x0000000000000862                playerInfo::setHealth(int)
+ .text._ZN10playerInfo9getHealthEv
                 0x0000000000000868        0x6 PlayerInfo.o
-                0x0000000000000868                PlayerInfo::GetHealth()
- .text._ZN11RunGameTaak11sendMessageEm
+                0x0000000000000868                playerInfo::getHealth()
+ .text._ZN11runGameTaak11sendMessageEm
                 0x000000000000086e       0x16 runGameTaak.o
-                0x000000000000086e                RunGameTaak::sendMessage(unsigned long)
- .text._ZThn4228_N11RunGameTaak11sendMessageEm
+                0x000000000000086e                runGameTaak::sendMessage(unsigned long)
+ .text._ZThn4228_N11runGameTaak11sendMessageEm
                 0x0000000000000884        0xc runGameTaak.o
-                0x0000000000000884                non-virtual thunk to RunGameTaak::sendMessage(unsigned long)
- .text._ZN11RunGameTaak12InputMessageE8buttonid
+                0x0000000000000884                non-virtual thunk to runGameTaak::sendMessage(unsigned long)
+ .text._ZN11runGameTaak12inputMessageE8buttonid
                 0x0000000000000890       0x40 runGameTaak.o
-                0x0000000000000890                RunGameTaak::InputMessage(buttonid)
- .text._ZThn4232_N11RunGameTaak12InputMessageE8buttonid
+                0x0000000000000890                runGameTaak::inputMessage(buttonid)
+ .text._ZThn4232_N11runGameTaak12inputMessageE8buttonid
                 0x00000000000008d0        0xc runGameTaak.o
-                0x00000000000008d0                non-virtual thunk to RunGameTaak::InputMessage(buttonid)
+                0x00000000000008d0                non-virtual thunk to runGameTaak::inputMessage(buttonid)
  .text._ZN5hwlib7ostreamlsEc
                 0x00000000000008dc        0xe runGameTaak.o
                 0x00000000000008dc                hwlib::ostream::operator<<(char)
  .text._ZN5hwliblsERNS_7ostreamEi
                 0x00000000000008ea       0xce runGameTaak.o
                 0x00000000000008ea                hwlib::operator<<(hwlib::ostream&, int)
- .text._ZN11RunGameTaak10write_hitsEv
+ .text._ZN11runGameTaak10write_hitsEv
                 0x00000000000009b8       0xb8 runGameTaak.o
-                0x00000000000009b8                RunGameTaak::write_hits()
- .text._ZN11RunGameTaak6AddHitEiii
+                0x00000000000009b8                runGameTaak::write_hits()
+ .text._ZN11runGameTaak6addHitEiii
                 0x0000000000000a70       0x26 runGameTaak.o
-                0x0000000000000a70                RunGameTaak::AddHit(int, int, int)
- .text._ZN11RunGameTaak17calculateCheckSumEm
+                0x0000000000000a70                runGameTaak::addHit(int, int, int)
+ .text._ZN11runGameTaak17calculateCheckSumEm
                 0x0000000000000a96       0x3e runGameTaak.o
-                0x0000000000000a96                RunGameTaak::calculateCheckSum(unsigned long)
- .text._ZN11RunGameTaak19computeStartCommandEmm
+                0x0000000000000a96                runGameTaak::calculateCheckSum(unsigned long)
+ .text._ZN11runGameTaak19computeStartCommandEmm
                 0x0000000000000ad4        0xe runGameTaak.o
-                0x0000000000000ad4                RunGameTaak::computeStartCommand(unsigned long, unsigned long)
- .text._ZN11RunGameTaak19computeShootCommandERm
+                0x0000000000000ad4                runGameTaak::computeStartCommand(unsigned long, unsigned long)
+ .text._ZN11runGameTaak19computeShootCommandERm
                 0x0000000000000ae2       0x68 runGameTaak.o
-                0x0000000000000ae2                RunGameTaak::computeShootCommand(unsigned long&)
- .text._ZN11RunGameTaak12isHitMessageEm
+                0x0000000000000ae2                runGameTaak::computeShootCommand(unsigned long&)
+ .text._ZN11runGameTaak12isHitMessageEm
                 0x0000000000000b4a       0x32 runGameTaak.o
-                0x0000000000000b4a                RunGameTaak::isHitMessage(unsigned long)
- .text._ZN11RunGameTaak10computeHitEm
+                0x0000000000000b4a                runGameTaak::isHitMessage(unsigned long)
+ .text._ZN11runGameTaak10computeHitEm
                 0x0000000000000b7c       0x64 runGameTaak.o
-                0x0000000000000b7c                RunGameTaak::computeHit(unsigned long)
- .text._ZN11RunGameTaak17computeDeathDelayEm
+                0x0000000000000b7c                runGameTaak::computeHit(unsigned long)
+ .text._ZN11runGameTaak17computeDeathDelayEm
                 0x0000000000000be0       0x2e runGameTaak.o
-                0x0000000000000be0                RunGameTaak::computeDeathDelay(unsigned long)
- .text._ZN11RunGameTaak17computeShootDelayEv
+                0x0000000000000be0                runGameTaak::computeDeathDelay(unsigned long)
+ .text._ZN11runGameTaak17computeShootDelayEv
                 0x0000000000000c0e       0x4a runGameTaak.o
-                0x0000000000000c0e                RunGameTaak::computeShootDelay()
+                0x0000000000000c0e                runGameTaak::computeShootDelay()
  .text._ZN4rtos7channelI8buttonidLi10EE4readEv
                 0x0000000000000c58       0x70 runGameTaak.o
                 0x0000000000000c58                rtos::channel<buttonid, 10>::read()
- .text._ZN11RunGameTaak12waitForInputEc
+ .text._ZN11runGameTaak12waitForInputEc
                 0x0000000000000cc8       0x7e runGameTaak.o
-                0x0000000000000cc8                RunGameTaak::waitForInput(char)
+                0x0000000000000cc8                runGameTaak::waitForInput(char)
  *fill*         0x0000000000000d46        0x2 
- .text.startup._ZN11RunGameTaak4mainEv
+ .text.startup._ZN11runGameTaak4mainEv
                 0x0000000000000d48      0x91c runGameTaak.o
-                0x0000000000000d48                RunGameTaak::main()
- .text.startup._ZN8SendTask4mainEv
+                0x0000000000000d48                runGameTaak::main()
+ .text.startup._ZN8sendTask4mainEv
                 0x0000000000001664       0xf8 SendTask.o
-                0x0000000000001664                SendTask::main()
- .text._ZN8SendTask11SendMessageEm
+                0x0000000000001664                sendTask::main()
+ .text._ZN8sendTask11sendMessageEm
                 0x000000000000175c       0x16 SendTask.o
-                0x000000000000175c                SendTask::SendMessage(unsigned long)
+                0x000000000000175c                sendTask::sendMessage(unsigned long)
  .text.startup._ZN14pause_detector4mainEv
                 0x0000000000001772       0x5a pause_detector.o
                 0x0000000000001772                pause_detector::main()
@@ -2127,18 +2127,18 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
  .text._ZN5hwlib29glcd_oled_i2c_128x64_buffered5flushEv
                 0x000000000000200c       0x58 DisplayTaak.o
                 0x000000000000200c                hwlib::glcd_oled_i2c_128x64_buffered::flush()
- .text.startup._ZN11DisplayTaak4mainEv
+ .text.startup._ZN11displayTaak4mainEv
                 0x0000000000002064      0x488 DisplayTaak.o
-                0x0000000000002064                DisplayTaak::main()
- .text._ZN4rtos7channelI11TypeMessageLi10EE5writeES1_
+                0x0000000000002064                displayTaak::main()
+ .text._ZN4rtos7channelI11typeMessageLi10EE5writeES1_
                 0x00000000000024ec       0x5a DisplayTaak.o
-                0x00000000000024ec                rtos::channel<TypeMessage, 10>::write(TypeMessage)
- .text._ZN11DisplayTaak11showMessageEPKcc
+                0x00000000000024ec                rtos::channel<typeMessage, 10>::write(typeMessage)
+ .text._ZN11displayTaak11showMessageEPKcc
                 0x0000000000002546       0x1e DisplayTaak.o
-                0x0000000000002546                DisplayTaak::showMessage(char const*, char)
- .text._ZN11DisplayTaak11showMessageEic
+                0x0000000000002546                displayTaak::showMessage(char const*, char)
+ .text._ZN11displayTaak11showMessageEic
                 0x0000000000002564       0x1e DisplayTaak.o
-                0x0000000000002564                DisplayTaak::showMessage(int, char)
+                0x0000000000002564                displayTaak::showMessage(int, char)
  .text._ZN11msg_decoder14pause_detectedEi
                 0x0000000000002582       0x40 msg_decoder.o
                 0x0000000000002582                msg_decoder::pause_detected(int)
@@ -2160,9 +2160,9 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
  .text._ZN3due7pin_out5flushEv
                 0x00000000000028c6        0x2 SpeakerTaak.o
                 0x00000000000028c6                due::pin_out::flush()
- .text.startup._ZN11SpeakerTaak4mainEv
+ .text.startup._ZN11speakerTaak4mainEv
                 0x00000000000028c8      0x1e4 SpeakerTaak.o
-                0x00000000000028c8                SpeakerTaak::main()
+                0x00000000000028c8                speakerTaak::main()
  .text          0x0000000000002aac       0x24 switch_to.o
                 0x0000000000002aac                switch_from_to
  .text._ZN4rtos8callback6cancelEv
@@ -2454,9 +2454,9 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
  .text._ZN3due8d2_36kHz5flushEv
                 0x0000000000003f68        0x2 main.o
                 0x0000000000003f68                due::d2_36kHz::flush()
- .text._ZN4rtos7channelI11TypeMessageLi10EE5clearEv
+ .text._ZN4rtos7channelI11typeMessageLi10EE5clearEv
                 0x0000000000003f6a       0x10 main.o
-                0x0000000000003f6a                rtos::channel<TypeMessage, 10>::clear()
+                0x0000000000003f6a                rtos::channel<typeMessage, 10>::clear()
  .text._ZN4rtos7channelIcLi18EE5clearEv
                 0x0000000000003f7a       0x10 main.o
                 0x0000000000003f7a                rtos::channel<char, 18>::clear()
@@ -2475,290 +2475,289 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
                 0x0000000000003fe0       0x30 main.o
                 0x0000000000003fe0                rtos::callback::~callback()
                 0x0000000000003fe0                rtos::callback::~callback()
- .text._ZN10PlayerInfoC2Ev
+ .text._ZN10playerInfoC2Ev
                 0x0000000000004010       0x68 main.o
-                0x0000000000004010                PlayerInfo::PlayerInfo()
-                0x0000000000004010                PlayerInfo::PlayerInfo()
+                0x0000000000004010                playerInfo::playerInfo()
+                0x0000000000004010                playerInfo::playerInfo()
  .text._ZN4rtos4taskILi4096EEC2EjPKc
                 0x0000000000004078       0x54 main.o
                 0x0000000000004078                rtos::task<4096>::task(unsigned int, char const*)
                 0x0000000000004078                rtos::task<4096>::task(unsigned int, char const*)
  .text.startup.main
-                0x00000000000040cc      0x410 main.o
+                0x00000000000040cc      0x40c main.o
                 0x00000000000040cc                main
  .text.__startup
-                0x00000000000044dc       0x48 bmptk_cortex.o
-                0x00000000000044dc                __startup
+                0x00000000000044d8       0x48 bmptk_cortex.o
+                0x00000000000044d8                __startup
  .text.__cxa_pure_virtual
-                0x0000000000004524        0x2 bmptk_cortex.o
-                0x0000000000004524                __cxa_pure_virtual
- *fill*         0x0000000000004526        0x2 
- .text.malloc   0x0000000000004528       0x24 bmptk_heap_bmptk.o
-                0x0000000000004528                malloc
- .text          0x000000000000454c       0xa0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_aeabi_ldivmod.o)
-                0x000000000000454c                __aeabi_ldivmod
- .text          0x00000000000045ec       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_aeabi_uldivmod.o)
-                0x00000000000045ec                __aeabi_uldivmod
- .text          0x000000000000461c      0x2d0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
-                0x000000000000461c                __udivmoddi4
- .text          0x00000000000048ec        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_dvmd_tls.o)
-                0x00000000000048ec                __aeabi_ldiv0
- .text          0x00000000000048f0       0xec /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-memcpy.o)
-                0x00000000000048f0                memcpy
- .text.memset   0x00000000000049dc       0x94 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-memset.o)
-                0x00000000000049dc                memset
-                0x0000000000004a70                . = ALIGN (0x4)
+                0x0000000000004520        0x2 bmptk_cortex.o
+                0x0000000000004520                __cxa_pure_virtual
+ *fill*         0x0000000000004522        0x2 
+ .text.malloc   0x0000000000004524       0x24 bmptk_heap_bmptk.o
+                0x0000000000004524                malloc
+ .text          0x0000000000004548       0xa0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_aeabi_ldivmod.o)
+                0x0000000000004548                __aeabi_ldivmod
+ .text          0x00000000000045e8       0x30 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_aeabi_uldivmod.o)
+                0x00000000000045e8                __aeabi_uldivmod
+ .text          0x0000000000004618      0x2d0 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
+                0x0000000000004618                __udivmoddi4
+ .text          0x00000000000048e8        0x4 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_dvmd_tls.o)
+                0x00000000000048e8                __aeabi_ldiv0
+ .text          0x00000000000048ec       0xec /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-memcpy.o)
+                0x00000000000048ec                memcpy
+ .text.memset   0x00000000000049d8       0x94 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/libc.a(lib_a-memset.o)
+                0x00000000000049d8                memset
+                0x0000000000004a6c                . = ALIGN (0x4)
  *(.glue_7t .glue_7)
- .glue_7        0x0000000000004a70        0x0 linker stubs
- .glue_7t       0x0000000000004a70        0x0 linker stubs
-                0x0000000000004a70                . = ALIGN (0x4)
+ .glue_7        0x0000000000004a6c        0x0 linker stubs
+ .glue_7t       0x0000000000004a6c        0x0 linker stubs
+                0x0000000000004a6c                . = ALIGN (0x4)
  *(.rodata .rodata.* .gnu.linkonce.r.*)
  .rodata._ZTVN3due6pin_inE
-                0x0000000000004a70       0x10 ButtonTaak.o
-                0x0000000000004a70                vtable for due::pin_in
+                0x0000000000004a6c       0x10 ButtonTaak.o
+                0x0000000000004a6c                vtable for due::pin_in
  .rodata._ZN3due8pin_infoENS_4pinsE.str1.1
-                0x0000000000004a80       0x33 ButtonTaak.o
- *fill*         0x0000000000004ab3        0x1 
- .rodata._ZTV10ButtonTaak
-                0x0000000000004ab4       0x14 ButtonTaak.o
-                0x0000000000004ab4                vtable for ButtonTaak
+                0x0000000000004a7c       0x33 ButtonTaak.o
+ *fill*         0x0000000000004aaf        0x1 
+ .rodata._ZTV10buttonTaak
+                0x0000000000004ab0       0x14 ButtonTaak.o
+                0x0000000000004ab0                vtable for buttonTaak
  .rodata._ZZN3due8pin_infoENS_4pinsEE14pin_info_array
-                0x0000000000004ac8       0xa4 ButtonTaak.o
- .rodata._ZN16InputControlTaak4mainEv.str1.1
-                0x0000000000004b6c       0x32 InputControlTaak.o
+                0x0000000000004ac4       0xa4 ButtonTaak.o
+ .rodata._ZN16inputControlTaak4mainEv.str1.1
+                0x0000000000004b68       0x32 InputControlTaak.o
                                          0x34 (size before relaxing)
- *fill*         0x0000000000004b9e        0x2 
- .rodata._ZTV16InputControlTaak
-                0x0000000000004ba0       0x24 InputControlTaak.o
-                0x0000000000004ba0                vtable for InputControlTaak
+ *fill*         0x0000000000004b9a        0x2 
+ .rodata._ZTV16inputControlTaak
+                0x0000000000004b9c       0x24 InputControlTaak.o
+                0x0000000000004b9c                vtable for inputControlTaak
  .rodata._ZTVN5hwlib21port_direct_from_in_tE
-                0x0000000000004bc4       0x14 KeypadTaak.o
-                0x0000000000004bc4                vtable for hwlib::port_direct_from_in_t
+                0x0000000000004bc0       0x14 KeypadTaak.o
+                0x0000000000004bc0                vtable for hwlib::port_direct_from_in_t
  .rodata._ZTVN5hwlib21port_direct_from_oc_tE
-                0x0000000000004bd8       0x1c KeypadTaak.o
-                0x0000000000004bd8                vtable for hwlib::port_direct_from_oc_t
+                0x0000000000004bd4       0x1c KeypadTaak.o
+                0x0000000000004bd4                vtable for hwlib::port_direct_from_oc_t
  .rodata._ZTVN3due6pin_ocE
-                0x0000000000004bf4       0x18 KeypadTaak.o
-                0x0000000000004bf4                vtable for due::pin_oc
+                0x0000000000004bf0       0x18 KeypadTaak.o
+                0x0000000000004bf0                vtable for due::pin_oc
  .rodata._ZTVN5hwlib6keypadILi16EEE
-                0x0000000000004c0c       0x14 KeypadTaak.o
-                0x0000000000004c0c                vtable for hwlib::keypad<16>
- .rodata._ZN10KeypadTaak4mainEv.str1.1
-                0x0000000000004c20       0x12 KeypadTaak.o
- *fill*         0x0000000000004c32        0x2 
- .rodata._ZTV10KeypadTaak
-                0x0000000000004c34       0x14 KeypadTaak.o
-                0x0000000000004c34                vtable for KeypadTaak
- .rodata._ZN11RunGameTaak10write_hitsEv.str1.1
-                0x0000000000004c48       0x3b runGameTaak.o
+                0x0000000000004c08       0x14 KeypadTaak.o
+                0x0000000000004c08                vtable for hwlib::keypad<16>
+ .rodata._ZN10keypadTaak4mainEv.str1.1
+                0x0000000000004c1c       0x12 KeypadTaak.o
+ *fill*         0x0000000000004c2e        0x2 
+ .rodata._ZTV10keypadTaak
+                0x0000000000004c30       0x14 KeypadTaak.o
+                0x0000000000004c30                vtable for keypadTaak
+ .rodata._ZN11runGameTaak10write_hitsEv.str1.1
+                0x0000000000004c44       0x3b runGameTaak.o
                                          0x3d (size before relaxing)
- .rodata._ZN11RunGameTaak4mainEv.str1.1
-                0x0000000000004c83       0xff runGameTaak.o
+ .rodata._ZN11runGameTaak4mainEv.str1.1
+                0x0000000000004c7f       0xff runGameTaak.o
  .rodata._ZN4rtos7channelI8buttonidLi10EE4readEv.str1.1
-                0x0000000000004d82       0x32 runGameTaak.o
- *fill*         0x0000000000004d82        0x2 
- .rodata._ZTV11RunGameTaak
-                0x0000000000004d84       0x34 runGameTaak.o
-                0x0000000000004d84                vtable for RunGameTaak
- .rodata._ZTV8SendTask
-                0x0000000000004db8       0x14 SendTask.o
-                0x0000000000004db8                vtable for SendTask
+                0x0000000000004d7e       0x32 runGameTaak.o
+ *fill*         0x0000000000004d7e        0x2 
+ .rodata._ZTV11runGameTaak
+                0x0000000000004d80       0x34 runGameTaak.o
+                0x0000000000004d80                vtable for runGameTaak
+ .rodata._ZTV8sendTask
+                0x0000000000004db4       0x14 SendTask.o
+                0x0000000000004db4                vtable for sendTask
  .rodata._ZTV14pause_detector
-                0x0000000000004dcc       0x14 pause_detector.o
-                0x0000000000004dcc                vtable for pause_detector
+                0x0000000000004dc8       0x14 pause_detector.o
+                0x0000000000004dc8                vtable for pause_detector
  .rodata._ZTVN5hwlib26i2c_bus_bit_banged_scl_sdaE
-                0x0000000000004de0       0x34 DisplayTaak.o
-                0x0000000000004de0                vtable for hwlib::i2c_bus_bit_banged_scl_sda
+                0x0000000000004ddc       0x34 DisplayTaak.o
+                0x0000000000004ddc                vtable for hwlib::i2c_bus_bit_banged_scl_sda
  .rodata._ZTVN5hwlib4lineE
-                0x0000000000004e14        0xc DisplayTaak.o
-                0x0000000000004e14                vtable for hwlib::line
+                0x0000000000004e10        0xc DisplayTaak.o
+                0x0000000000004e10                vtable for hwlib::line
  .rodata._ZTVN5hwlib13terminal_fromE
-                0x0000000000004e20       0x20 DisplayTaak.o
-                0x0000000000004e20                vtable for hwlib::terminal_from
+                0x0000000000004e1c       0x20 DisplayTaak.o
+                0x0000000000004e1c                vtable for hwlib::terminal_from
  .rodata._ZTVN5hwlib16font_default_8x8E
-                0x0000000000004e40        0xc DisplayTaak.o
-                0x0000000000004e40                vtable for hwlib::font_default_8x8
+                0x0000000000004e3c        0xc DisplayTaak.o
+                0x0000000000004e3c                vtable for hwlib::font_default_8x8
  .rodata._ZTVN5hwlib29glcd_oled_i2c_128x64_bufferedE
-                0x0000000000004e4c       0x18 DisplayTaak.o
-                0x0000000000004e4c                vtable for hwlib::glcd_oled_i2c_128x64_buffered
- .rodata._ZN11DisplayTaak4mainEv.str1.1
-                0x0000000000004e64        0xd DisplayTaak.o
+                0x0000000000004e48       0x18 DisplayTaak.o
+                0x0000000000004e48                vtable for hwlib::glcd_oled_i2c_128x64_buffered
+ .rodata._ZN11displayTaak4mainEv.str1.1
+                0x0000000000004e60        0xd DisplayTaak.o
                                          0x41 (size before relaxing)
  .rodata._ZN5hwlibL11unspecifiedE
-                0x0000000000004e71        0x4 DisplayTaak.o
+                0x0000000000004e6d        0x4 DisplayTaak.o
  .rodata._ZN5hwlibL22ssd1306_initializationE
-                0x0000000000004e75       0x29 DisplayTaak.o
- *fill*         0x0000000000004e9e        0x2 
- .rodata._ZTV11DisplayTaak
-                0x0000000000004ea0       0x14 DisplayTaak.o
-                0x0000000000004ea0                vtable for DisplayTaak
+                0x0000000000004e71       0x29 DisplayTaak.o
+ *fill*         0x0000000000004e9a        0x2 
+ .rodata._ZTV11displayTaak
+                0x0000000000004e9c       0x14 DisplayTaak.o
+                0x0000000000004e9c                vtable for displayTaak
  .rodata._ZN11msg_decoder4mainEv.str1.1
-                0x0000000000004eb4       0x35 msg_decoder.o
+                0x0000000000004eb0       0x35 msg_decoder.o
                                          0x6b (size before relaxing)
- *fill*         0x0000000000004ee9        0x3 
+ *fill*         0x0000000000004ee5        0x3 
  .rodata._ZTV11msg_decoder
-                0x0000000000004eec       0x24 msg_decoder.o
-                0x0000000000004eec                vtable for msg_decoder
- .rodata._ZTV11SpeakerTaak
-                0x0000000000004f10       0x14 SpeakerTaak.o
-                0x0000000000004f10                vtable for SpeakerTaak
+                0x0000000000004ee8       0x24 msg_decoder.o
+                0x0000000000004ee8                vtable for msg_decoder
+ .rodata._ZTV11speakerTaak
+                0x0000000000004f0c       0x14 SpeakerTaak.o
+                0x0000000000004f0c                vtable for speakerTaak
  .rodata._ZTVN4rtos8waitableE
-                0x0000000000004f24        0xc rtos.o
-                0x0000000000004f24                vtable for rtos::waitable
+                0x0000000000004f20        0xc rtos.o
+                0x0000000000004f20                vtable for rtos::waitable
  .rodata._ZTVN4rtos4flagE
-                0x0000000000004f30        0xc rtos.o
-                0x0000000000004f30                vtable for rtos::flag
+                0x0000000000004f2c        0xc rtos.o
+                0x0000000000004f2c                vtable for rtos::flag
  .rodata._ZTVN4rtos8callbackE
-                0x0000000000004f3c       0x10 rtos.o
-                0x0000000000004f3c                vtable for rtos::callback
+                0x0000000000004f38       0x10 rtos.o
+                0x0000000000004f38                vtable for rtos::callback
  .rodata._ZTVN4rtos12channel_baseE
-                0x0000000000004f4c        0xc rtos.o
-                0x0000000000004f4c                vtable for rtos::channel_base
+                0x0000000000004f48        0xc rtos.o
+                0x0000000000004f48                vtable for rtos::channel_base
  .rodata._Z15task_trampolinev.str1.1
-                0x0000000000004f58       0x2e rtos.o
+                0x0000000000004f54       0x2e rtos.o
  .rodata._ZN4rtos12waitable_set17waitable_allocateEv.str1.1
-                0x0000000000004f86       0x1b rtos.o
+                0x0000000000004f82       0x1b rtos.o
  .rodata._ZN4rtos3addEPNS_9task_baseE.str1.1
-                0x0000000000004fa1       0x2e rtos.o
+                0x0000000000004f9d       0x2e rtos.o
  .rodata._ZN4rtos4beatEv.str1.1
-                0x0000000000004fcf       0x3e rtos.o
+                0x0000000000004fcb       0x3e rtos.o
  .rodata._ZN4rtos5printERN5hwlib7ostreamE.str1.1
-                0x000000000000500d       0x83 rtos.o
+                0x0000000000005009       0x83 rtos.o
  .rodata._ZN4rtos9task_base5blockEv.str1.1
-                0x0000000000005090       0x37 rtos.o
+                0x000000000000508c       0x37 rtos.o
                                          0x4b (size before relaxing)
  .rodata._ZN4rtos9task_baseC2ER9coroutineILl0EEjPKc.str1.1
-                0x00000000000050c7        0x8 rtos.o
+                0x00000000000050c3        0x8 rtos.o
  .rodata._ZNK4rtos12channel_base5printERN5hwlib7ostreamEb.str1.1
-                0x00000000000050cf       0x23 rtos.o
+                0x00000000000050cb       0x23 rtos.o
  .rodata._ZNK4rtos12mailbox_base5printERN5hwlib7ostreamEb.str1.1
-                0x00000000000050f2       0x1b rtos.o
+                0x00000000000050ee       0x1b rtos.o
  .rodata._ZNK4rtos4flag5printERN5hwlib7ostreamEb.str1.1
-                0x000000000000510d       0x1e rtos.o
+                0x0000000000005109       0x1e rtos.o
  .rodata._ZNK4rtos5clock5printERN5hwlib7ostreamEb.str1.1
-                0x000000000000512b       0x1d rtos.o
+                0x0000000000005127       0x1d rtos.o
  .rodata._ZNK4rtos5eventeqERKS0_.str1.1
-                0x0000000000005148       0x21 rtos.o
+                0x0000000000005144       0x21 rtos.o
  .rodata._ZNK4rtos5eventplERKS0_.str1.1
-                0x0000000000005169       0x1e rtos.o
+                0x0000000000005165       0x1e rtos.o
  .rodata._ZNK4rtos5mutex5printERN5hwlib7ostreamEb.str1.1
-                0x0000000000005187       0x29 rtos.o
+                0x0000000000005183       0x29 rtos.o
  .rodata._ZNK4rtos5timer5printERN5hwlib7ostreamEb.str1.1
-                0x00000000000051b0       0x13 rtos.o
+                0x00000000000051ac       0x13 rtos.o
  .rodata._ZNK4rtos9pool_base5printERN5hwlib7ostreamEb.str1.1
-                0x00000000000051c3       0x10 rtos.o
+                0x00000000000051bf       0x10 rtos.o
  .rodata._ZNK4rtos9task_base5printERN5hwlib7ostreamEb.str1.1
-                0x00000000000051d3       0x39 rtos.o
+                0x00000000000051cf       0x39 rtos.o
  .rodata._ZTVN4rtos5clockE
-                0x000000000000520c       0x20 rtos.o
-                0x000000000000520c                vtable for rtos::clock
+                0x0000000000005208       0x20 rtos.o
+                0x0000000000005208                vtable for rtos::clock
  .rodata._ZTVN4rtos5timerE
-                0x000000000000522c       0x24 rtos.o
-                0x000000000000522c                vtable for rtos::timer
+                0x0000000000005228       0x24 rtos.o
+                0x0000000000005228                vtable for rtos::timer
  .rodata._ZTVN4rtos9task_baseE
-                0x0000000000005250       0x14 rtos.o
-                0x0000000000005250                vtable for rtos::task_base
+                0x000000000000524c       0x14 rtos.o
+                0x000000000000524c                vtable for rtos::task_base
  .rodata._ZTVN5hwlib14pin_in_dummy_tE
-                0x0000000000005264       0x10 hwlib.o
-                0x0000000000005264                vtable for hwlib::pin_in_dummy_t
+                0x0000000000005260       0x10 hwlib.o
+                0x0000000000005260                vtable for hwlib::pin_in_dummy_t
  .rodata._ZTVN5hwlib14pin_oc_dummy_tE
-                0x0000000000005274       0x18 hwlib.o
-                0x0000000000005274                vtable for hwlib::pin_oc_dummy_t
+                0x0000000000005270       0x18 hwlib.o
+                0x0000000000005270                vtable for hwlib::pin_oc_dummy_t
  .rodata._ZTVN5hwlib19port_in_from_pins_tE
-                0x000000000000528c       0x14 hwlib.o
-                0x000000000000528c                vtable for hwlib::port_in_from_pins_t
+                0x0000000000005288       0x14 hwlib.o
+                0x0000000000005288                vtable for hwlib::port_in_from_pins_t
  .rodata._ZTVN5hwlib19port_oc_from_pins_tE
-                0x00000000000052a0       0x1c hwlib.o
-                0x00000000000052a0                vtable for hwlib::port_oc_from_pins_t
+                0x000000000000529c       0x1c hwlib.o
+                0x000000000000529c                vtable for hwlib::port_oc_from_pins_t
  .rodata._ZTVN5hwlib20cout_using_uart_putcE
-                0x00000000000052bc       0x10 hwlib.o
-                0x00000000000052bc                vtable for hwlib::cout_using_uart_putc
+                0x00000000000052b8       0x10 hwlib.o
+                0x00000000000052b8                vtable for hwlib::cout_using_uart_putc
  .rodata._ZTVN5hwlib9image_8x8E
-                0x00000000000052cc        0xc hwlib.o
-                0x00000000000052cc                vtable for hwlib::image_8x8
+                0x00000000000052c8        0xc hwlib.o
+                0x00000000000052c8                vtable for hwlib::image_8x8
  .rodata._ZTVN5hwlib14image_invert_tE
-                0x00000000000052d8        0xc hwlib.o
-                0x00000000000052d8                vtable for hwlib::image_invert_t
+                0x00000000000052d4        0xc hwlib.o
+                0x00000000000052d4                vtable for hwlib::image_invert_t
  .rodata._ZTVN5hwlib13window_part_tE
-                0x00000000000052e4       0x18 hwlib.o
-                0x00000000000052e4                vtable for hwlib::window_part_t
+                0x00000000000052e0       0x18 hwlib.o
+                0x00000000000052e0                vtable for hwlib::window_part_t
  .rodata._ZN5hwlib16font_default_8x86imagesE
-                0x00000000000052fc      0xa00 hwlib.o
-                0x00000000000052fc                hwlib::font_default_8x8::images
+                0x00000000000052f8      0xa00 hwlib.o
+                0x00000000000052f8                hwlib::font_default_8x8::images
  .rodata._ZN5hwlibL5blackE
-                0x0000000000005cfc        0x4 hwlib.o
+                0x0000000000005cf8        0x4 hwlib.o
  .rodata._ZN5hwlibL5whiteE
-                0x0000000000005d00        0x4 hwlib.o
+                0x0000000000005cfc        0x4 hwlib.o
  .rodata._ZTVN3due7pin_outE
-                0x0000000000005d04       0x10 main.o
-                0x0000000000005d04                vtable for due::pin_out
+                0x0000000000005d00       0x10 main.o
+                0x0000000000005d00                vtable for due::pin_out
  .rodata._ZTVN3due8d2_36kHzE
-                0x0000000000005d14       0x10 main.o
-                0x0000000000005d14                vtable for due::d2_36kHz
+                0x0000000000005d10       0x10 main.o
+                0x0000000000005d10                vtable for due::d2_36kHz
  .rodata._ZTVN4rtos4taskILi4096EEE
-                0x0000000000005d24       0x14 main.o
-                0x0000000000005d24                vtable for rtos::task<4096>
- .rodata._ZTVN4rtos7channelI11TypeMessageLi10EEE
-                0x0000000000005d38        0xc main.o
-                0x0000000000005d38                vtable for rtos::channel<TypeMessage, 10>
+                0x0000000000005d20       0x14 main.o
+                0x0000000000005d20                vtable for rtos::task<4096>
+ .rodata._ZTVN4rtos7channelI11typeMessageLi10EEE
+                0x0000000000005d34        0xc main.o
+                0x0000000000005d34                vtable for rtos::channel<typeMessage, 10>
  .rodata._ZTV14pause_listener
-                0x0000000000005d44        0xc main.o
-                0x0000000000005d44                vtable for pause_listener
+                0x0000000000005d40        0xc main.o
+                0x0000000000005d40                vtable for pause_listener
  .rodata._ZTVN4rtos7channelIiLi128EEE
-                0x0000000000005d50        0xc main.o
-                0x0000000000005d50                vtable for rtos::channel<int, 128>
+                0x0000000000005d4c        0xc main.o
+                0x0000000000005d4c                vtable for rtos::channel<int, 128>
  .rodata._ZTVN4rtos7channelIcLi18EEE
-                0x0000000000005d5c        0xc main.o
-                0x0000000000005d5c                vtable for rtos::channel<char, 18>
+                0x0000000000005d58        0xc main.o
+                0x0000000000005d58                vtable for rtos::channel<char, 18>
  .rodata._ZTVN4rtos7channelI8buttonidLi10EEE
-                0x0000000000005d68        0xc main.o
-                0x0000000000005d68                vtable for rtos::channel<buttonid, 10>
- .rodata._ZN10PlayerInfoC2Ev.str1.1
-                0x0000000000005d74        0xe main.o
+                0x0000000000005d64        0xc main.o
+                0x0000000000005d64                vtable for rtos::channel<buttonid, 10>
+ .rodata._ZN10playerInfoC2Ev.str1.1
+                0x0000000000005d70        0xe main.o
  .rodata._ZN4rtos8callbackD2Ev.str1.1
-                0x0000000000005d82       0x21 main.o
+                0x0000000000005d7e       0x21 main.o
                                          0x35 (size before relaxing)
  .rodata.main.str1.1
-                0x0000000000005da3      0x12e main.o
-                0x0000000000005ed4                . = ALIGN (0x4)
- *fill*         0x0000000000005ed1        0x3 
+                0x0000000000005d9f      0x121 main.o
+                0x0000000000005ec0                . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0000000000005ed4                . = ALIGN (0x4)
+                0x0000000000005ec0                . = ALIGN (0x4)
  *(.gcc_except_table)
-                0x0000000000005ed4                . = ALIGN (0x4)
+                0x0000000000005ec0                . = ALIGN (0x4)
  *(.eh_frame_hdr)
-                0x0000000000005ed4                . = ALIGN (0x4)
+                0x0000000000005ec0                . = ALIGN (0x4)
  *(.eh_frame)
-                0x0000000000005ed4                . = ALIGN (0x4)
-                0x0000000000005ed4                __text_end = .
+                0x0000000000005ec0                . = ALIGN (0x4)
+                0x0000000000005ec0                __text_end = .
                 [!provide]                        PROVIDE (__text_end = __text_end)
 
-.vfp11_veneer   0x0000000000005ed4        0x0
- .vfp11_veneer  0x0000000000005ed4        0x0 linker stubs
+.vfp11_veneer   0x0000000000005ec0        0x0
+ .vfp11_veneer  0x0000000000005ec0        0x0 linker stubs
 
-.v4_bx          0x0000000000005ed4        0x0
- .v4_bx         0x0000000000005ed4        0x0 linker stubs
+.v4_bx          0x0000000000005ec0        0x0
+ .v4_bx         0x0000000000005ec0        0x0 linker stubs
 
-.iplt           0x0000000000005ed4        0x0
- .iplt          0x0000000000005ed4        0x0 ButtonTaak.o
+.iplt           0x0000000000005ec0        0x0
+ .iplt          0x0000000000005ec0        0x0 ButtonTaak.o
 
 .IF_YOU_SEE_THIS_YOU_HAVE_ONE_OR_MORE_GLOBAL_OBJECT_CONSTRUCTORS
  *(.init)
  *(.preinit_array)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array)
-                0x0000000000005ed4                . = ALIGN (0x4)
-                0x0000000000005ed4                __exidx_start = .
+                0x0000000000005ec0                . = ALIGN (0x4)
+                0x0000000000005ec0                __exidx_start = .
                 [!provide]                        PROVIDE (__exidx_start = __exidx_start)
 
-.ARM.exidx      0x0000000000005ed4        0x8
+.ARM.exidx      0x0000000000005ec0        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x0000000000005ed4        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
+ .ARM.exidx     0x0000000000005ec0        0x8 /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/thumb/v7-m/libgcc.a(_udivmoddi4.o)
 
-.rel.dyn        0x0000000000005edc        0x0
- .rel.iplt      0x0000000000005edc        0x0 ButtonTaak.o
-                0x0000000000005edc                . = ALIGN (0x4)
-                0x0000000000005edc                __exidx_end = .
+.rel.dyn        0x0000000000005ec8        0x0
+ .rel.iplt      0x0000000000005ec8        0x0 ButtonTaak.o
+                0x0000000000005ec8                . = ALIGN (0x4)
+                0x0000000000005ec8                __exidx_end = .
                 [!provide]                        PROVIDE (__exidx_end = __exidx_end)
 
 .bss            0x0000000020000000    0x1405c
@@ -2850,9 +2849,9 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
                 0x000000002001405c                __bss_end = .
                 [!provide]                        PROVIDE (__bss_end = __bss_end)
 
-.data           0x000000002001405c       0x30 load address 0x0000000000005edc
+.data           0x000000002001405c       0x30 load address 0x0000000000005ec8
                 0x000000002001405c                . = ALIGN (0x4)
-                0x0000000000005edc                __data_init_start = LOADADDR (.data)
+                0x0000000000005ec8                __data_init_start = LOADADDR (.data)
                 [!provide]                        PROVIDE (__data_init_start = __data_init_start)
                 0x000000002001405c                __data_start = .
                 [!provide]                        PROVIDE (__data_start = __data_start)
@@ -2885,13 +2884,13 @@ LOAD /usr/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib/thumb
                 0x000000002001408c                . = ALIGN (0x4)
                 0x000000002001408c                __data_end = .
                 [!provide]                        PROVIDE (__data_end = __data_end)
-                0x0000000000005edc                __data_init_end = LOADADDR (.data)
+                0x0000000000005ec8                __data_init_end = LOADADDR (.data)
                 [!provide]                        PROVIDE (__data_init_end = __data_init_end)
                 [!provide]                        PROVIDE (__data_size = (__data_end - __data_start))
                 [!provide]                        PROVIDE (__data_init_size = __data_size)
                 [!provide]                        PROVIDE (__data_init_end = (__data_init_start + __data_init_size))
 
-.igot.plt       0x000000002001408c        0x0 load address 0x0000000000005f0c
+.igot.plt       0x000000002001408c        0x0 load address 0x0000000000005ef8
  .igot.plt      0x000000002001408c        0x0 ButtonTaak.o
                 0x000000002001408c                . = ALIGN (0x4)
                 0x000000002001408c                __heap_start = .

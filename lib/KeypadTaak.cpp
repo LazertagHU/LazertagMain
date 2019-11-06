@@ -3,9 +3,9 @@
 
 enum class KeypadState_t        {WAIT_FOR_INPUT};
 
-void KeypadTaak::main(){
+void keypadTaak::main(){
 
-    KeypadState_t   KeypadState =   KeypadState_t::WAIT_FOR_INPUT;
+    KeypadState_t   keypadState =   KeypadState_t::WAIT_FOR_INPUT;
     auto out0                   =   hwlib::target::pin_oc(hwlib::target::pins::a0);
     auto out1                   =   hwlib::target::pin_oc(hwlib::target::pins::a1);
     auto out2                   =   hwlib::target::pin_oc(hwlib::target::pins::a2);
@@ -20,19 +20,19 @@ void KeypadTaak::main(){
     auto in_port                =   hwlib::port_in_from(in0, in1, in2, in3);
     
     auto matrix                 =   hwlib::matrix_of_switches(out_port, in_port);
-    auto Keypad                 =   hwlib::keypad<16>(matrix, "147*2580369#ABCDE");
+    auto keypad                 =   hwlib::keypad<16>(matrix, "147*2580369#ABCDE");
     
     for(;;){
-        switch(KeypadState){
+        switch(keypadState){
             case KeypadState_t::WAIT_FOR_INPUT:
-                wait(KeyClock);
-                Temp = Keypad.pressed();
-                if(Temp == '\0'){
+                wait(keyClock);
+                temp = keypad.pressed();
+                if(temp == '\0'){
                     break;
                 }
-                else if(Temp != '\0'){
-                    Key = Keypad.getc();
-                    Keypadlistener->KeyPressed(Key);
+                else if(temp != '\0'){
+                    key = keypad.getc();
+                    keyPadListener->keyPressed(key);
                     break;
                 }
         }

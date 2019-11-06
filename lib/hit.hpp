@@ -4,9 +4,9 @@
 struct hit{
     /// \brief
     /// struct to save hit data in for later tansfer to the pc
-    int EnemyID;
-    int Damage;
-    int Time;
+    int enemyID;
+    int damage;
+    int time;
 };
 
 #endif
