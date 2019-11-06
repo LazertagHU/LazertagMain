@@ -13,7 +13,7 @@ void runGameTaak::main()
     uint32_t                shootCommand        = 0b1'00000'00000'00000'1'00000'00000'00000; // dit moet veranderd worden
     bool                    playerWeaponEntered = false;
     bool                    playerIDEntered     = false;
-    bool                    gameLeader          = true;
+    bool                    gameLeader          = false;
     bool                    gameTimeEntered     = false;
     //bool                    transferHitsAllowed = false;
     int                     countdown           = 0;
