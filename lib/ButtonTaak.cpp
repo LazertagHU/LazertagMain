@@ -18,7 +18,7 @@ void ButtonTaak::main(){
                     break;
                 }
                 if(!reloadButton.read() && !reloadPressed ){
-                    buttonPressed = true;
+                    reloadPressed = true;
                     Keypadlistener->KeyPressed('F');
                     ButtonState = ButtonState_t::PRESSED;
                     break;
@@ -29,6 +29,7 @@ void ButtonTaak::main(){
                 wait(ButtonClock);
                 if(Button.read() && reloadButton.read()){
                     buttonPressed = false;
+                    reloadPressed = false;
                     ButtonState = ButtonState_t::WAIT_FOR_INPUT;
                     break;
                 }
