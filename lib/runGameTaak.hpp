@@ -57,7 +57,7 @@ private:
     uint32_t                    setTimeCommand      = 0b1'00000'00000'00000'1'00000'00000'00000;
     uint32_t                    shootCommand        = 0b1'00000'00000'00000'1'00000'00000'00000;
     uint32_t                    msg;
-    bool                        gameLeader          = true;
+    bool                        gameLeader          = false;
     int                         countdown           = 0;
     int                         remainingGameTime   = 0;
     int                         bullets             = 0;
