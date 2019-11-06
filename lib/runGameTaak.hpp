@@ -14,12 +14,8 @@
 #include "msg_decoder.hpp"
 //#include "TransferHitsControlTaak.hpp"
 #include "InputControlTaak.hpp"
-<<<<<<< HEAD
-
-=======
 #include "SpeakerTaak.hpp"
 #include "hit.hpp"
->>>>>>> 718c31de2c1fafdfc3c3f3cfe02d3a72f119e0eb
 
 class runGameTaak : public rtos::task<>, public msg_listener, public inputListener
 {

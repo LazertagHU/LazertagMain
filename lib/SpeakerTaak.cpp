@@ -17,15 +17,9 @@ void speakerTaak::main(){
     auto            lsp                 = hwlib::target::pin_out( hwlib::target::pins::d7 );
     int             half_period;
     unsigned int    end;
-<<<<<<< HEAD
-    unsigned int    TempFreq;
-    const std::array<noot, 2> Shooting{ noot{200, 100000}, noot{1500, 695000} };
-    const std::array<noot, 2> Hit{ noot{200, 100000}, noot{130, 600000} };
-=======
     unsigned int    tempFreq;
     const std::array<noot, 2> shooting{ noot{200, 60000}, noot{1500, 695000} };
     const std::array<noot, 2> hit{ noot{200, 100000}, noot{130, 600000} };
->>>>>>> 718c31de2c1fafdfc3c3f3cfe02d3a72f119e0eb
     
     for(;;){
         
