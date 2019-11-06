@@ -81,9 +81,9 @@ Inheritance diagram for msg_decoder:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae9b18eff0ca3fc3d3c9248e4e38fd246"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmsg__decoder.html#ae9b18eff0ca3fc3d3c9248e4e38fd246">msg_decoder</a> (const char *name, <a class="el" href="classmsg__listener.html">msg_listener</a> &amp;listener)</td></tr>
-<tr class="memdesc:ae9b18eff0ca3fc3d3c9248e4e38fd246"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for the <a class="el" href="classmsg__decoder.html">msg_decoder</a> task.  <a href="#ae9b18eff0ca3fc3d3c9248e4e38fd246">More...</a><br /></td></tr>
-<tr class="separator:ae9b18eff0ca3fc3d3c9248e4e38fd246"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc80b303c765253e6695cd55ce7ed12"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmsg__decoder.html#a1fc80b303c765253e6695cd55ce7ed12">msg_decoder</a> (int prio, const char *name, <a class="el" href="classmsg__listener.html">msg_listener</a> &amp;listener)</td></tr>
+<tr class="memdesc:a1fc80b303c765253e6695cd55ce7ed12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor for the <a class="el" href="classmsg__decoder.html">msg_decoder</a> task.  <a href="#a1fc80b303c765253e6695cd55ce7ed12">More...</a><br /></td></tr>
+<tr class="separator:a1fc80b303c765253e6695cd55ce7ed12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedf7c07607ec1207225e103d76b223f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmsg__decoder.html#aedf7c07607ec1207225e103d76b223f3">pause_detected</a> (int n) override</td></tr>
 <tr class="memdesc:aedf7c07607ec1207225e103d76b223f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for writing detected pauses.  <a href="#aedf7c07607ec1207225e103d76b223f3">More...</a><br /></td></tr>
 <tr class="separator:aedf7c07607ec1207225e103d76b223f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -99,16 +99,16 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:abc7b4a87b2c02a91bf0f21561d1ba794"><td class="memItemLeft" align="right" valign="top"><a id="abc7b4a87b2c02a91bf0f21561d1ba794"></a>
 <a class="el" href="classmsg__listener.html">msg_listener</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>listener</b></td></tr>
 <tr class="separator:abc7b4a87b2c02a91bf0f21561d1ba794"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0dc3f0de8a1d35df71a3a82d86a3c0b"><td class="memItemLeft" align="right" valign="top"><a id="aa0dc3f0de8a1d35df71a3a82d86a3c0b"></a>
-rtos::channel&lt; int, 128 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pauses</b></td></tr>
-<tr class="separator:aa0dc3f0de8a1d35df71a3a82d86a3c0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf58e8a6d0e98057fb6d3cf9458d6392"><td class="memItemLeft" align="right" valign="top"><a id="acf58e8a6d0e98057fb6d3cf9458d6392"></a>
+rtos::channel&lt; int, 128 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>pauseChannel</b></td></tr>
+<tr class="separator:acf58e8a6d0e98057fb6d3cf9458d6392"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6881ffc5884ea043f2da71c12d254353"><td class="memItemLeft" align="right" valign="top"><a id="a6881ffc5884ea043f2da71c12d254353"></a>
 rtos::timer&#160;</td><td class="memItemRight" valign="bottom"><b>reset_timer</b></td></tr>
 <tr class="separator:a6881ffc5884ea043f2da71c12d254353"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae9b18eff0ca3fc3d3c9248e4e38fd246"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae9b18eff0ca3fc3d3c9248e4e38fd246">&#9670;&nbsp;</a></span>msg_decoder()</h2>
+<a id="a1fc80b303c765253e6695cd55ce7ed12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fc80b303c765253e6695cd55ce7ed12">&#9670;&nbsp;</a></span>msg_decoder()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -119,6 +119,12 @@ rtos::timer&#160;</td><td class="memItemRight" valign="bottom"><b>reset_timer</b
         <tr>
           <td class="memname">msg_decoder::msg_decoder </td>
           <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>prio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
@@ -142,7 +148,7 @@ rtos::timer&#160;</td><td class="memItemRight" valign="bottom"><b>reset_timer</b
 </div><div class="memdoc">
 
 <p>Default constructor for the <a class="el" href="classmsg__decoder.html">msg_decoder</a> task. </p>
-<p>Names the task, binds the listener, inits the pauses channel and inits the reset_timer. </p>
+<p>Names the task, binds the listener, inits the pauseChannel and inits the reset_timer. </p>
 
 </div>
 </div>
@@ -171,7 +177,7 @@ rtos::timer&#160;</td><td class="memItemRight" valign="bottom"><b>reset_timer</b
 </div><div class="memdoc">
 
 <p>Main() for the <a class="el" href="classmsg__decoder.html">msg_decoder</a> task. </p>
-<p>The main recieves pauses with the pauses channel. It uses these to decode incoming messages following our transmission protocol. The decoded messages are checked for validity and passed on to the <a class="el" href="classmsg__listener.html">msg_listener</a>. </p>
+<p>The main recieves pauses with the pauseChannel. It uses these to decode incoming messages following our transmission protocol. The decoded messages are checked for validity and passed on to the <a class="el" href="classmsg__listener.html">msg_listener</a>. </p>
 
 </div>
 </div>
@@ -200,7 +206,7 @@ rtos::timer&#160;</td><td class="memItemRight" valign="bottom"><b>reset_timer</b
 </div><div class="memdoc">
 
 <p>Interface for writing detected pauses. </p>
-<p>Public function that is found in the <a class="el" href="classpause__listener.html">pause_listener</a>. This can be called from outside the class to write data into the pauses channel. </p>
+<p>Public function that is found in the <a class="el" href="classpause__listener.html">pause_listener</a>. This can be called from outside the class to write data into the pauseChannel. </p>
 
 <p>Implements <a class="el" href="classpause__listener.html#a2aec2253d71d4c141e569809ac4bb4be">pause_listener</a>.</p>
 
@@ -213,7 +219,7 @@ rtos::timer&#160;</td><td class="memItemRight" valign="bottom"><b>reset_timer</b
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 4 2019 15:52:51 for Lazertag by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 6 2019 08:44:00 for Lazertag by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

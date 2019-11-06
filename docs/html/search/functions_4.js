@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['inputcontroltaak',['InputControlTaak',['../class_input_control_taak.html#abcee4f57204ed64ec4e928d1905a75ea',1,'InputControlTaak']]],
-  ['inputmessage',['InputMessage',['../class_input_listener.html#ab3d5bb8747280eb6af882bedea55b57c',1,'InputListener::InputMessage()'],['../class_run_game_taak.html#a97ed955e62d8f25a12ebb560a49bb005',1,'RunGameTaak::InputMessage()']]]
+  ['inputcontroltaak',['inputControlTaak',['../classinput_control_taak.html#a2862b089700d26af874075244d520914',1,'inputControlTaak']]],
+  ['inputmessage',['inputMessage',['../classinput_listener.html#abaa88363edb30302e4bbebed9d97bca4',1,'inputListener::inputMessage()'],['../classrun_game_taak.html#a3a788de4e86402844e9f5db337e348ec',1,'runGameTaak::inputMessage()']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['keypadlistener',['KeypadListener',['../class_keypad_listener.html',1,'']]],
-  ['keypadtaak',['KeypadTaak',['../class_keypad_taak.html',1,'']]]
+  ['keypadlistener',['keypadListener',['../classkeypad_listener.html',1,'']]],
+  ['keypadtaak',['keypadTaak',['../classkeypad_taak.html',1,'']]]
 ];

@@ -1,9 +1,11 @@
 var searchData=
 [
-  ['sendmessage',['SendMessage',['../class_send_task.html#a5126a68270348e42b8ac755c2fa213da',1,'SendTask::SendMessage()'],['../classmsg__listener.html#add69f084de91a4cdd33949b6d33ab54d',1,'msg_listener::sendMessage()'],['../class_run_game_taak.html#a92451b151164365b46d383e9ea6f4c39',1,'RunGameTaak::sendMessage()']]],
-  ['sendtask',['SendTask',['../class_send_task.html#a7ee51b66953596cfa7972624d08da48f',1,'SendTask']]],
-  ['sethealth',['SetHealth',['../class_player_info.html#ae4bc2007066890a9c199bf204ade4fc9',1,'PlayerInfo']]],
-  ['setplayerid',['SetPlayerID',['../class_player_info.html#a3cc44f7d523a87a41067bc21bb67c0a4',1,'PlayerInfo']]],
-  ['setweapon',['SetWeapon',['../class_player_info.html#ae7b6d12550f823d279e4b6572ad0c70a',1,'PlayerInfo']]],
-  ['showmessage',['showMessage',['../class_display_taak.html#a565a0f801a936b9bdce82e8043bc66f2',1,'DisplayTaak::showMessage(const char *Message, char oledRec)'],['../class_display_taak.html#a1c555953fdb21515e2d8a61bf8ec8734',1,'DisplayTaak::showMessage(int Message, char oledRec)']]]
+  ['sendmessage',['sendMessage',['../classmsg__listener.html#add69f084de91a4cdd33949b6d33ab54d',1,'msg_listener::sendMessage()'],['../classrun_game_taak.html#ae85351d9f71412805810be41e40d8b20',1,'runGameTaak::sendMessage()'],['../classsend_task.html#a69250cb9829a4490b547f33080d1b5ef',1,'sendTask::sendMessage()']]],
+  ['sendtask',['sendTask',['../classsend_task.html#a3308fb608bffc046a82b872e133b1189',1,'sendTask']]],
+  ['sethealth',['setHealth',['../classplayer_info.html#acb72fec6cd5a6e090cc6c70b047ee7ed',1,'playerInfo']]],
+  ['setplayerid',['setPlayerID',['../classplayer_info.html#a24075b60e8f5835df361c3250b119825',1,'playerInfo']]],
+  ['setweapon',['setWeapon',['../classplayer_info.html#a2630f08af1aa329ea752bb6f7cdacfb7',1,'playerInfo']]],
+  ['shootsound',['shootSound',['../classspeaker_taak.html#a9aec630c53192379581eaadd26b6ad86',1,'speakerTaak']]],
+  ['showmessage',['showMessage',['../classdisplay_taak.html#abacf64c947e0e3d6dfdfd27785e78298',1,'displayTaak::showMessage(const char *message, char oledRec)'],['../classdisplay_taak.html#a2cc626eef9dacf2be71944ddb3063dde',1,'displayTaak::showMessage(int message, char oledRec)']]],
+  ['speakertaak',['speakerTaak',['../classspeaker_taak.html#a9cc29a26002d75dda5e3cf49525958b0',1,'speakerTaak']]]
 ];

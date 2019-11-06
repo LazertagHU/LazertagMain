@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['enemyid',['EnemyID',['../structhit.html#adae7d7aa63997b4b1127bfe1e8226ee0',1,'hit']]]
+  ['enemyid',['enemyID',['../structhit.html#a3b699a06b2e292852039846efb1f4f2c',1,'hit']]]
 ];

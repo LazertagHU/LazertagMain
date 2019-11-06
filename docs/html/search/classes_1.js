@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['displaytaak',['DisplayTaak',['../class_display_taak.html',1,'']]]
+  ['displaytaak',['displayTaak',['../classdisplay_taak.html',1,'']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['keypadtaak',['KeypadTaak',['../class_keypad_taak.html#a83ad9fcdcd74f0da00149c0bb374396c',1,'KeypadTaak']]],
-  ['keypressed',['KeyPressed',['../class_input_control_taak.html#af52edad72e3acd53a318e80dde46da3c',1,'InputControlTaak::KeyPressed()'],['../class_keypad_listener.html#acd706d3ed37fce0a80c70133145ebd7a',1,'KeypadListener::KeyPressed()']]]
+  ['keypadtaak',['keypadTaak',['../classkeypad_taak.html#a2ce63a90feed5a8f0828cf33ea57e65d',1,'keypadTaak']]],
+  ['keypressed',['keyPressed',['../classinput_control_taak.html#af555ef66d50088712df8b0d55fcda1b8',1,'inputControlTaak::keyPressed()'],['../classkeypad_listener.html#a8655ae8afdf340566e839a51e47214fa',1,'keypadListener::keyPressed()']]]
 ];

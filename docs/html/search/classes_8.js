@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sendtask',['SendTask',['../class_send_task.html',1,'']]]
+  ['rungametaak',['runGameTaak',['../classrun_game_taak.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rungametaak',['RunGameTaak',['../class_run_game_taak.html#aa75d9602f880c0272e99f2acc115f290',1,'RunGameTaak']]]
+  ['rungametaak',['runGameTaak',['../classrun_game_taak.html#a988d2c3019281a5586022ab5e9574fd5',1,'runGameTaak']]]
 ];

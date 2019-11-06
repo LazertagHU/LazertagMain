@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['buttontaak',['ButtonTaak',['../class_button_taak.html#ae0a07b3ae5090b0efec3e47437676573',1,'ButtonTaak']]]
+  ['displaytaak',['displayTaak',['../classdisplay_taak.html#a5b81ad44747efe96a7b789be924514b9',1,'displayTaak']]]
 ];

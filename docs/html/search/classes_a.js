@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['weapon',['weapon',['../structweapon.html',1,'']]]
+  ['typemessage',['typeMessage',['../structtype_message.html',1,'']]]
 ];

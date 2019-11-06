@@ -80,9 +80,9 @@ Inheritance diagram for pause_detector:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a28ac21fddc7385fb50fad820068efae5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpause__detector.html#a28ac21fddc7385fb50fad820068efae5">pause_detector</a> (const char *name, hwlib::pin_in &amp;irsensor, <a class="el" href="classpause__listener.html">pause_listener</a> &amp;listener)</td></tr>
-<tr class="memdesc:a28ac21fddc7385fb50fad820068efae5"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor of the <a class="el" href="classpause__detector.html">pause_detector</a> task.  <a href="#a28ac21fddc7385fb50fad820068efae5">More...</a><br /></td></tr>
-<tr class="separator:a28ac21fddc7385fb50fad820068efae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a384589d3a9134f9631350c4042268f03"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpause__detector.html#a384589d3a9134f9631350c4042268f03">pause_detector</a> (int prio, const char *name, hwlib::pin_in &amp;irsensor, <a class="el" href="classpause__listener.html">pause_listener</a> &amp;listener)</td></tr>
+<tr class="memdesc:a384589d3a9134f9631350c4042268f03"><td class="mdescLeft">&#160;</td><td class="mdescRight">The default constructor of the <a class="el" href="classpause__detector.html">pause_detector</a> task.  <a href="#a384589d3a9134f9631350c4042268f03">More...</a><br /></td></tr>
+<tr class="separator:a384589d3a9134f9631350c4042268f03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -101,13 +101,10 @@ hwlib::pin_in &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>irsens
 <tr class="memitem:a505e21f4b6adbca5feddfefd4bc5fdce"><td class="memItemLeft" align="right" valign="top"><a id="a505e21f4b6adbca5feddfefd4bc5fdce"></a>
 rtos::clock&#160;</td><td class="memItemRight" valign="bottom"><b>interval_clock</b></td></tr>
 <tr class="separator:a505e21f4b6adbca5feddfefd4bc5fdce"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18fc00594844d0a5fbe80abe599efb38"><td class="memItemLeft" align="right" valign="top"><a id="a18fc00594844d0a5fbe80abe599efb38"></a>
-hwlib::target::pin_out&#160;</td><td class="memItemRight" valign="bottom"><b>debugPin</b> = hwlib::target::pin_out( hwlib::target::pins::d7 )</td></tr>
-<tr class="separator:a18fc00594844d0a5fbe80abe599efb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a28ac21fddc7385fb50fad820068efae5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28ac21fddc7385fb50fad820068efae5">&#9670;&nbsp;</a></span>pause_detector()</h2>
+<a id="a384589d3a9134f9631350c4042268f03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a384589d3a9134f9631350c4042268f03">&#9670;&nbsp;</a></span>pause_detector()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -118,6 +115,12 @@ hwlib::target::pin_out&#160;</td><td class="memItemRight" valign="bottom"><b>deb
         <tr>
           <td class="memname">pause_detector::pause_detector </td>
           <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>prio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const char *&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
@@ -187,7 +190,7 @@ hwlib::target::pin_out&#160;</td><td class="memItemRight" valign="bottom"><b>deb
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Nov 4 2019 15:52:51 for Lazertag by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 6 2019 08:44:00 for Lazertag by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>
