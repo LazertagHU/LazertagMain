@@ -42,10 +42,10 @@ int main(){
 
     auto display            = displayTaak(8, "DisplayTaak");
     //auto transfer           = TransferHitsControlTaak(9, "TransferHitsControlTaak",playerpool);
-    auto transmitter        = sendTask(2, "InputTask", led, laserSight, 1000 );
+    auto transmitter        = sendTask(1, "sendTask", led, laserSight, 1000 );
     auto speaker            = speakerTaak(4, "SpeakerTaak");
     auto runGame            = runGameTaak(6, "RunGameTaak",display, transmitter, playerpool, speaker);   
-    auto decoder            = msg_decoder(1, "decoder", runGame);
+    auto decoder            = msg_decoder(2, "decoder", runGame);
     auto pause_detection    = pause_detector(0, "pause_detector", ir_sensor, decoder);
 
     /* run rtos */
